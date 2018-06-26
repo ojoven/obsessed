@@ -24,5 +24,16 @@ class SimpleHtmlDom {
 
 	}
 
+	// GET PROPERTY IF AVAILABLE
+	public static function find($dom, $path, $position, $property) {
+
+		$element = $dom->find($path, $position);
+		if ($element) {
+			return $element->$property;
+		} else {
+			return false;
+		}
+	}
+
 
 }

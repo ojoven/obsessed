@@ -31,8 +31,12 @@ class IndexController extends Controller {
 		$titleInElement = '.enlaceNaranja';
 		$excerptInElement = '> .contenidoPost .entryContent > p';
 		$imgInElement = '> .contenidoPost .entryContent .imgContenidoPost';
+		$linkToSinglePost = '.enlaceNaranja';
 
-		$page = 132;
+		$contentInSinglePost = '#contenidoSinglePost .entry-content';
+		$datePublished = '#contenidoSinglePost .spanFooterPost time';
+
+		$page = 1;
 
 		$loop = true;
 		while ($loop) {
@@ -42,9 +46,15 @@ class IndexController extends Controller {
 
 			foreach ($html->find($elementInList) as $element) {
 
-				$title = $element->find($titleInElement, 0);
-				$excerpt = $element->find($excerptInElement, 0);
-				$image = $element->find($imgInElement, 0);
+				$title = SimpleHtmlDom::find($element, $titleInElement, 0, 'plaintext');
+				$excerpt = SimpleHtmlDom::find($element, $excerptInElement, 0, 'plaintext');
+				$image = SimpleHtmlDom::find($element, $imgInElement, 0, 'src');
+				$link = SimpleHtmlDom::find($element, $linkToSinglePost, 0, 'href');
+
+				// Single post
+				$htmlSingle = SimpleHtmlDom::fileGetHtml($link);
+				$content = SimpleHtmlDom::find($htmlSingle, $contentInSinglePost, 0, 'innertext');
+				$date = SimpleHtmlDom::find($htmlSingle, $datePublished, 0, 'datetime');
 
 			}
 
