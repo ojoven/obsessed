@@ -11,6 +11,10 @@
 |
 */
 
+// MAIN ENDPOINTS
 Route::get('/', 'IndexController@index');
-Route::get('/playground', 'IndexController@playground');
-Route::get('/reddit', 'IndexController@reddit');
+Route::get('/update', 'IndexController@update');
+
+// PLAYGROUND ENDPOINTS
+Route::get('/playground', 'PlaygroundController@playground');
+Route::get('/reddit', 'PlaygroundController@reddit');
