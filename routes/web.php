@@ -13,3 +13,4 @@
 
 Route::get('/', 'IndexController@index');
 Route::get('/playground', 'IndexController@playground');
+Route::get('/reddit', 'IndexController@reddit');

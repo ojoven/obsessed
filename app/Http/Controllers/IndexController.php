@@ -1,15 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use Reddit\Api\Client;
 use App\Lib\DateFunctions;
 use App\Lib\Functions;
 use App\Lib\SimpleHtmlDom;
-use App\Models\Category;
-use App\Models\Event;
-use App\Models\Place;
-use App\Models\Scraper;
-use App\Models\Twitter;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -65,6 +60,13 @@ class IndexController extends Controller {
 
 		$data = [];
 		return view('index', $data);
+	}
+
+	public function reddit() {
+
+		$jsonPosts = 'https://www.reddit.com/r/SideProject/new.json?sort=new';
+		$jsonComments = 'https://www.reddit.com/r/SideProject/comments.json?sort=new';
+
 	}
 
 }
