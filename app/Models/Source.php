@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Source;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+interface Source {
 
-class Source extends Model {
+	public function addNewPosts($sourceId);
+
+	public function addNewComments($sourceId);
 
 }
