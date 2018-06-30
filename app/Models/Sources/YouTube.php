@@ -2,10 +2,9 @@
 
 namespace App\Models\Sources;
 
-use App\Models\Source;
+use App\Models\SourceInterface;
 
-class YouTube implements Source {
-
+class YouTube implements SourceInterface {
 
 
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Obsession;
 use Reddit\Api\Client;
 
 // Models
@@ -16,15 +17,8 @@ class IndexController extends Controller {
 
 	public function update() {
 
-		// Get obsessions
-
-		// For each obsession
-
-		// Get sources
-
-		// For each source, check if new posts
-
-		// If new posts, add them to database
+		$obsessionModel = new Obsession();
+		$obsessionModel->addDataObsessions();
 
 	}
 

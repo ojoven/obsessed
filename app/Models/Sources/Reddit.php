@@ -2,15 +2,22 @@
 
 namespace App\Models\Sources;
 
+use App\Lib\Functions;
 use App\Models\Post;
-use App\Models\Source;
+use App\Models\SourceInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Reddit extends Model implements Source {
+class Reddit extends Model implements SourceInterface {
 
 	protected $sourceType = 'reddit';
 	protected $maxNumberDbPostsToFetch = 100;
 	protected $urlBase = 'https://www.reddit.com/';
+
+	public function addNewContent($subreddit) {
+
+		$this->addNewPosts($subreddit);
+		$this->addNewComments($subreddit);
+	}
 
 	/**=====================================
 	 * POSTS
@@ -25,7 +32,7 @@ class Reddit extends Model implements Source {
 		$postsDb = $this->getSavedPostsDb($subreddit);
 
 		// Filter just the new ones
-		$posts = $this->intersectPosts($postsReddit, $postsDb);
+		$posts = $this->getPostsNotOnDb($postsReddit, $postsDb);
 
 		// With the new ones, we parse them
 		$posts = $this->parsePostsToDb($posts, $subreddit);
@@ -57,15 +64,21 @@ class Reddit extends Model implements Source {
 
 	}
 
-	public function intersectPosts($postsReddit, $postsDb) {
+	public function getPostsNotOnDb($postsReddit, $postsDb) {
+
+		$posts = [];
+
+		$idPostsDb = Functions::getArrayValuesFromArrayIndex($postsDb, 'external_id');
 
 		foreach ($postsReddit as $postReddit) {
 
 			$externalId = $postReddit['data']['id'];
+			if (!in_array($externalId, $idPostsDb)) {
+				$posts[] = $postReddit;
+			}
 
 		}
 
-		$posts = array();
 		return $posts;
 
 	}
@@ -80,24 +93,29 @@ class Reddit extends Model implements Source {
 
 			$postDb['external_id'] = $post['id'];
 			$postDb['title'] = $post['title'];
-			$postDb['text'] = $post['self_text'] . ' ' . $post['url'];
+			$postDb['text'] = $post['selftext'] . ' ' . $post['url'];
 			$postDb['url'] = $this->urlBase . $post['permalink'];
 			$postDb['thumbnail'] = $post['thumbnail'];
+
+			if (isset($post['preview']['images'][0]['source']['url'])) {
+				$postDb['image'] = $post['preview']['images'][0]['source']['url'];
+			}
+
 			$postDb['rating'] = $post['score'];
-			$postDb['image'] = $post['preview']['images']['source']['url'];
 			$postDb['source_type'] = $this->sourceType;
 			$postDb['source_id'] = $subreddit;
-			$postDb['created_at'] = $post['created_utc'];
+			$postDb['created_at'] = date("Y-m-d H:i:s", $post["created_utc"]);
 
 			$postsDb[] = $postDb;
 		}
 
-		return $posts;
+		return $postsDb;
 	}
 
 	public function savePostsToDb($posts) {
 
-		return true;
+		$result = Post::insert($posts);
+		return $result;
 	}
 
 
@@ -108,12 +126,8 @@ class Reddit extends Model implements Source {
 	public function addNewComments($subreddit) {
 
 		$url = $this->urlBase . 'r/' . $subreddit . '/comments.json?sort=new';
-		$json = file_get_contents($url);
-		$comments = json_decode($json, true);
-	}
-
-	private function parsePosts($posts) {
-
+		//$json = file_get_contents($url);
+		//$comments = json_decode($json, true);
 	}
 
 	private function parseComments($posts) {
