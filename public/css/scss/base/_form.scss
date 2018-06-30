@@ -1,0 +1,37 @@
+.form-control {
+    width: rem(280);
+    height: rem(55);
+    border-radius: 8px 0 0 8px;
+    box-shadow: none;
+    background-color: $color-white;
+    font-size: rem(16);
+    padding: 0 rem(20);
+    margin-right: rem(-1);
+    border: 0;
+    &:focus {
+        box-shadow: none;
+    }
+    @include media(768) {
+        width: rem(400);
+        height: rem(70);
+    }
+    @include media(992) {
+        width: rem(365);
+    }
+}
+
+.btn__submit {
+    border-radius: 0 8px 8px 0;
+    box-shadow: none;
+    border: 0;
+    background-color: $color-primary;
+    color: $color-white;
+    padding: 0 rem(25);
+    transition: .3s;
+    &:hover {
+        background: darken($color-primary, 4%);
+    }
+    @include mediaMax(767) {
+        height: rem(55);
+    }
+}
