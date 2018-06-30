@@ -3,6 +3,7 @@
 namespace App\Models\Sources;
 
 use App\Lib\Functions;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\SourceInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -125,12 +126,94 @@ class Reddit extends Model implements SourceInterface {
 
 	public function addNewComments($subreddit) {
 
-		$url = $this->urlBase . 'r/' . $subreddit . '/comments.json?sort=new';
-		//$json = file_get_contents($url);
-		//$comments = json_decode($json, true);
+		// Get the latest comments
+		$commentsReddit = $this->getLatestComments($subreddit);
+
+		// Get the saved comments
+		$commentsDb = $this->getSavedCommentsDb($subreddit);
+
+		// Filter just the new ones
+		$comments = $this->getCommentsNotOnDb($commentsReddit, $commentsDb);
+
+		// With the new ones, we parse them
+		$comments = $this->parseCommentsToDb($comments, $subreddit);
+
+		// Once parsed, we save them
+		$result = $this->saveCommentsToDb($comments);
 	}
 
-	private function parseComments($posts) {
+	public function getLatestComments($subreddit) {
 
+		$url = $this->urlBase . 'r/' . $subreddit . '/comments.json?sort=new';
+		$json = file_get_contents($url);
+		$commentsObject = json_decode($json, true);
+
+		$comments = $commentsObject['data']['children'];
+
+		return $comments;
+	}
+
+	public function getSavedCommentsDb($subreddit) {
+
+		$comments = Comment::where('source_type', 'reddit')
+			->where('source_id', $subreddit)
+			->skip(0)->take($this->maxNumberDbPostsToFetch)
+			->get()->toArray();
+
+		return $comments;
+
+	}
+
+	public function getCommentsNotOnDb($commentsReddit, $commentsDb) {
+
+		$comments = [];
+
+		$idCommentsDb = Functions::getArrayValuesFromArrayIndex($commentsDb, 'external_id');
+
+		foreach ($commentsReddit as $commentReddit) {
+
+			$externalId = $commentReddit['data']['id'];
+			if (!in_array($externalId, $idCommentsDb)) {
+				$comments[] = $commentReddit;
+			}
+
+		}
+
+		return $comments;
+
+	}
+
+	public function parseCommentsToDb($comments, $subreddit) {
+
+		$commentsDb = array();
+
+		foreach ($comments as $comment) {
+
+			$comment = $comment['data'];
+
+			$commentDb['external_id'] = $comment['id'];
+			$commentDb['text'] = $comment['body'];
+			$commentDb['url'] = $this->urlBase . $comment['permalink'];
+			$commentDb['thumbnail'] = $comment['thumbnail'];
+
+			if (isset($comment['preview']['images'][0]['source']['url'])) {
+				$commentDb['image'] = $comment['preview']['images'][0]['source']['url'];
+			}
+
+			$commentDb['rating'] = $comment['score'];
+			$commentDb['source_type'] = $this->sourceType;
+			$commentDb['source_id'] = $subreddit;
+			$commentDb['created_at'] = date("Y-m-d H:i:s", $comment["created_utc"]);
+
+			$commentsDb[] = $commentDb;
+		}
+
+		return $commentsDb;
+	}
+
+	public function saveCommentsToDb($comments) {
+
+		$result = Comment::insert($comments);
+		return $result;
 	}
 }
