@@ -19,7 +19,7 @@ class Source extends Model {
 		switch($source['type']) {
 			case 'reddit':
 				$redditModel = new Reddit();
-				$redditModel->addNewContent($source['name']);
+				$redditModel->addNewContent($source['source_key']);
 		}
 
 	}

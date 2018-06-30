@@ -12,7 +12,7 @@ class Reddit extends Model implements SourceInterface {
 
 	protected $sourceType = 'reddit';
 	protected $maxNumberDbPostsToFetch = 100;
-	protected $urlBase = 'https://www.reddit.com/';
+	protected $urlBase = 'https://www.reddit.com';
 
 	public function addNewContent($subreddit) {
 
@@ -45,7 +45,7 @@ class Reddit extends Model implements SourceInterface {
 
 	public function getLatestPosts($subreddit) {
 
-		$url = $this->urlBase . 'r/' . $subreddit . '/new.json?sort=new';
+		$url = $this->urlBase . '/r/' . $subreddit . '/new.json?sort=new';
 		$json = file_get_contents($url);
 		$postsObject = json_decode($json, true);
 
@@ -57,7 +57,7 @@ class Reddit extends Model implements SourceInterface {
 	public function getSavedPostsDb($subreddit) {
 
 		$posts = Post::where('source_type', 'reddit')
-			->where('source_id', $subreddit)
+			->where('source_key', $subreddit)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -104,7 +104,7 @@ class Reddit extends Model implements SourceInterface {
 
 			$postDb['rating'] = $post['score'];
 			$postDb['source_type'] = $this->sourceType;
-			$postDb['source_id'] = $subreddit;
+			$postDb['source_key'] = $subreddit;
 			$postDb['created_at'] = date("Y-m-d H:i:s", $post["created_utc"]);
 
 			$postsDb[] = $postDb;
@@ -144,7 +144,7 @@ class Reddit extends Model implements SourceInterface {
 
 	public function getLatestComments($subreddit) {
 
-		$url = $this->urlBase . 'r/' . $subreddit . '/comments.json?sort=new';
+		$url = $this->urlBase . '/r/' . $subreddit . '/comments.json?sort=new';
 		$json = file_get_contents($url);
 		$commentsObject = json_decode($json, true);
 
@@ -156,7 +156,7 @@ class Reddit extends Model implements SourceInterface {
 	public function getSavedCommentsDb($subreddit) {
 
 		$comments = Comment::where('source_type', 'reddit')
-			->where('source_id', $subreddit)
+			->where('source_key', $subreddit)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -192,23 +192,38 @@ class Reddit extends Model implements SourceInterface {
 			$comment = $comment['data'];
 
 			$commentDb['external_id'] = $comment['id'];
+			$commentDb['reply_to_post_id'] = $this->parseReplyToPostFromLinkId($comment['link_id']);
+			$commentDb['reply_to_comment_id'] = $this->parseReplyToCommentRedditFromParentId($comment['parent_id']);
+
 			$commentDb['text'] = $comment['body'];
 			$commentDb['url'] = $this->urlBase . $comment['permalink'];
-			$commentDb['thumbnail'] = $comment['thumbnail'];
-
-			if (isset($comment['preview']['images'][0]['source']['url'])) {
-				$commentDb['image'] = $comment['preview']['images'][0]['source']['url'];
-			}
 
 			$commentDb['rating'] = $comment['score'];
 			$commentDb['source_type'] = $this->sourceType;
-			$commentDb['source_id'] = $subreddit;
+			$commentDb['source_key'] = $subreddit;
 			$commentDb['created_at'] = date("Y-m-d H:i:s", $comment["created_utc"]);
 
 			$commentsDb[] = $commentDb;
 		}
 
 		return $commentsDb;
+	}
+
+	public function parseReplyToPostFromLinkId($commentLinkId) {
+
+		$replyToPostId = str_replace('t3_', '', $commentLinkId);
+		return $replyToPostId;
+	}
+
+	public function parseReplyToCommentRedditFromParentId($commentParentId) {
+
+		$replyToCommentId = null;
+		if (strpos($commentParentId, 't3_') !== false) { // If parent ID is the root post
+			return $replyToCommentId;
+		} else {
+			return str_replace('t1_', '', $commentParentId);
+		}
+
 	}
 
 	public function saveCommentsToDb($comments) {
