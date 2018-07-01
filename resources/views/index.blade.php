@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>vApp - Home-1</title>
-    <!-- Enable Zoom on Mobile Device -->
+    <title>Obsessed about Side Projects?</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -29,8 +29,11 @@
                 <div class="col-12">
                     <div class="navigation-content">
                         <a href="#" class="navigation__brand">
+                            <!--
                             <img class="navigation-main__logo" src="img/brand-logo-white.png" alt="">
                             <img class="sticky-nav__logo" src="img/brand-logo-white.png" alt="sticky logo">
+                            -->
+                            Obsessed Club
                         </a>
                         <button class="navigation__toggler"></button>
                         <!-- offcanvas toggle button -->
@@ -98,7 +101,7 @@
                         </nav>
                         <!-- nav item end -->
                         <div class="navigation-button">
-                            <a href="#" class="db-btn db-btn__outline nav-cta-btn">Try for free</a>
+                            <a href="#" class="db-btn db-btn__outline nav-cta-btn">Get obsessed for $5/mo</a>
                         </div>
                     </div>
                 </div>
@@ -117,9 +120,9 @@
                     <div class="hero">
                         <div class="hero-wrapper">
                             <div class="hero-content">
-                                <h1 class="hero__title">Get things done with this beautiful task app.</h1>
-                                <p class="hero__caption">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.</p>
-                                <a href="#" class="db-btn db-btn__lemon db-btn__type-md">Try for free</a>
+                                <h1 class="hero__title">Obsessed about Side Projects and Product Development?</h1>
+                                <p class="hero__caption">Feed your obsession. Say goodbye to FOMO. Get notified on every post and comment, video, or conversation on the Internet related to Side Projects.</p>
+                                <a href="#" class="db-btn db-btn__lemon db-btn__type-md">Get obsessed for $5/mo</a>
                             </div>
                             <!-- hero content end -->
                         </div>
@@ -187,10 +190,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Manage your time,
-                            <br>make things more oraganized</h2>
+                        <h2>A premium feeding service,
+                            <br>limited to 50 <strike>mad</strike> people all around the world</h2>
                         <p>
-                            Our users are impatient. They're probably distracted too. Keep it simple and beautiful, fun and functional. Clean aesthetics supported by a strong concept is what we stand for.
+                            We're offering a premium service
                         </p>
                     </div>
                 </div>
@@ -256,7 +259,7 @@
                         </div>
                         <!-- media content end -->
                         <div class="fact reveal">
-                            <h2 class="fact__title">Never miss a task,
+                            <h2 class="fact__title">Never miss a conversation,
                                 <br> Get always step ahead.</h2>
                             <p class="fact__description">Sitting proudly atop M3565 is the two-storey penthouse. The master bedroom suite is phenomenally spacious and opens out to a breathtaking plunge pool and bar area that makes the most of its unrivalled position.
                             </p>
@@ -264,13 +267,13 @@
 
                             <ul class="fact-counter">
                                 <li class="fact-counter__list">
-                                    <span class="fact-counter__list-value">1M</span>
-                                    <span class="fact-counter__list-title">Downloads</span>
+                                    <span class="fact-counter__list-value">30</span>
+                                    <span class="fact-counter__list-title">posts / minute</span>
                                 </li>
                                 <!-- counter single item end -->
                                 <li class="fact-counter__list">
-                                    <span class="fact-counter__list-value">30k</span>
-                                    <span class="fact-counter__list-title">Positive Reviews</span>
+                                    <span class="fact-counter__list-value">70K</span>
+                                    <span class="fact-counter__list-title">Total posts</span>
                                 </li>
                                 <!-- counter single item end -->
                             </ul>
@@ -289,8 +292,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>How vApp works?</h2>
-                        <p>Our users are impatient. They're probably distracted too. Keep it simple and beautiful, fun and functional. Clean aesthetics supported by a strong concept is what we stand for.
+                        <h2>Why Obsessed Club?</h2>
+                        <p>
+                            We've created a place for your obsession.
                         </p>
                     </div>
                 </div>

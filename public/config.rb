@@ -23,7 +23,6 @@ css_dir = "css"
 sass_dir = "css/scss"
 images_dir = "img"
 
-
 # Assuming this theme is in sites/*/themes/THEMENAME, you can add the partials
 # included with a module by uncommenting and modifying one of the lines below:
 #add_import_path "../../../default/modules/FOO"
