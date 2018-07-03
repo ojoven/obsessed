@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Sources\Reddit;
+use App\Models\Sources\Scraper;
 use Illuminate\Database\Eloquent\Model;
 
 class Source extends Model {
@@ -20,6 +21,12 @@ class Source extends Model {
 			case 'reddit':
 				$redditModel = new Reddit();
 				$redditModel->addNewContent($source['source_key']);
+				break;
+
+			case 'scraper':
+				$scraperModel = new Scraper();
+				$scraperModel->addNewContent($source['source_key']);
+				break;
 		}
 
 	}
