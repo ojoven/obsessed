@@ -2,6 +2,7 @@
 
 namespace App\Models\Sources;
 
+use App\Lib\SimpleHtmlDom;
 use App\Models\SourceInterface;
 
 class Scraper implements SourceInterface {
@@ -22,7 +23,43 @@ class Scraper implements SourceInterface {
 
 		$config = include($pathToConfigFile);
 
+		$page = 1;
 
+		$loop = true;
+		while ($loop) {
+
+			$url = $this->getUrl($config['url'], $page);
+			$html = SimpleHtmlDom::fileGetHtml($url);
+
+			foreach ($html->find($config['postInList']) as $postDom) {
+
+				foreach ($config['fields'] as $fieldName => $fieldAttributes) {
+
+					if ($fieldAttributes['available'] && isset($fieldAttributes['pathList'])) {
+						$position = isset($fieldAttributes['position']) ? $fieldAttributes['position'] : 0;
+						$post[$fieldName] = SimpleHtmlDom::find($postDom, $fieldAttributes['pathList'], $position, $fieldAttributes['attribute']);
+						if (isset($fieldAttributes['parse'])) {
+							// Call to parser function
+						}
+					}
+
+				}
+
+				$post['source_type'] = 'scraper';
+				$post['source_key'] = $sourceId;
+			}
+
+			$page++;
+			$loop = false;
+
+		}
+
+	}
+
+	public function getUrl($url, $page) {
+
+		$url = str_replace('[page]', $page, $url);
+		return $url;
 	}
 
 	public function addNewComments($sourceId) {
