@@ -17,4 +17,3 @@ Route::get('/update', 'IndexController@update');
 
 // PLAYGROUND ENDPOINTS
 Route::get('/playground', 'PlaygroundController@playground');
-Route::get('/reddit', 'PlaygroundController@reddit');

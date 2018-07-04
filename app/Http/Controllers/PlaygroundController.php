@@ -14,6 +14,7 @@ class PlaygroundController extends Controller {
 
 	public function playground() {
 
+		/**
 		// Literautas
 		$urlBase = 'https://www.literautas.com/es/blog/page/';
 		$elementInList = '#contenidoPosts > article';
@@ -51,6 +52,10 @@ class PlaygroundController extends Controller {
 			$loop = false;
 
 		}
+		 * **/
+
+		$html = file_get_contents('https://www.indiehackers.com/forum/newest/page/1');
+		$result = file_put_contents(app_path() . '/tmp/indiehackers.html', $html);
 
 		$data = [];
 		return view('index', $data);
@@ -63,7 +68,8 @@ class PlaygroundController extends Controller {
 
 	}
 
-	public function update() {
+	public function play1() {
+
 
 	}
 

@@ -8,52 +8,88 @@ use App\Models\SourceInterface;
 class Scraper implements SourceInterface {
 
 	protected $pathToConfigFiles = '/Models/Sources/scrapers/';
+	protected $pathToParserFiles = '/Models/Sources/parsers/';
 
-	public function addNewContent($sourceId) {
+	protected $page;
+	protected $sourceKey;
 
-		$this->addNewPosts($sourceId);
-		$this->addNewComments($sourceId);
+	public function addNewContent($sourceKey) {
+		
+		$this->sourceKey = $sourceKey;
+
+		$this->addNewPosts($sourceKey);
+		$this->addNewComments($sourceKey);
 
 	}
 
-	public function addNewPosts($sourceId) {
+	public function addNewPosts($sourceKey) {
 
-		$pathToConfigFile = app_path() . $this->pathToConfigFiles . $sourceId . '.php';
+		// Load configuration file
+		$pathToConfigFile = app_path() . $this->pathToConfigFiles . $sourceKey . '.php';
 		if (!file_exists($pathToConfigFile)) return false;
-
 		$config = include($pathToConfigFile);
 
-		$page = 1;
+		// Load parser file (if it exists)
+		$pathToParserFile = app_path() . $this->pathToParserFiles . $sourceKey . '.php';
+		if (file_exists($pathToParserFile)) {
+			require_once $pathToParserFile;
+		}
+
+		$this->page = 1;
 
 		$loop = true;
 		while ($loop) {
 
-			$url = $this->getUrl($config['url'], $page);
-			$html = SimpleHtmlDom::fileGetHtml($url);
+			$html = $this->getHtmlDom($config);
+			if (!$html) break;
 
-			foreach ($html->find($config['postInList']) as $postDom) {
+			foreach ($html->find($config['parameters']['postInList']) as $postDom) {
 
-				foreach ($config['fields'] as $fieldName => $fieldAttributes) {
+				foreach ($config['fieldsPost'] as $fieldName => $fieldAttributes) {
 
 					if ($fieldAttributes['available'] && isset($fieldAttributes['pathList'])) {
 						$position = isset($fieldAttributes['position']) ? $fieldAttributes['position'] : 0;
 						$post[$fieldName] = SimpleHtmlDom::find($postDom, $fieldAttributes['pathList'], $position, $fieldAttributes['attribute']);
-						if (isset($fieldAttributes['parse'])) {
+						if (isset($fieldAttributes['parse']) && $fieldAttributes['parse']) {
 							// Call to parser function
+							$functionName = $sourceKey . '_' . $fieldName;
+							if (function_exists($functionName)) {
+								$post[$fieldName] = $functionName($post[$fieldName]);
+							}
 						}
 					}
 
 				}
 
 				$post['source_type'] = 'scraper';
-				$post['source_key'] = $sourceId;
+				$post['source_key'] = $sourceKey;
 			}
 
-			$page++;
+			$this->page++;
 			$loop = false;
 
 		}
 
+	}
+
+	public function getHtmlDom($config) {
+
+		$url = $this->getUrl($config['parameters']['url'], $this->page);
+		$html = file_get_contents($url);
+
+		if (isset($config['parameters']['parseHTML'])
+			&& $config['parameters']['parseHTML']) {
+
+			$functionName = $this->sourceKey . '_html';
+			if (function_exists($functionName)) {
+				$html = $functionName($html);
+			}
+
+		}
+
+		$htmlDom = SimpleHtmlDom::strGetHtml($html);
+
+		return $htmlDom;
 	}
 
 	public function getUrl($url, $page) {
@@ -62,7 +98,7 @@ class Scraper implements SourceInterface {
 		return $url;
 	}
 
-	public function addNewComments($sourceId) {
+	public function addNewComments($sourceKey) {
 		
 	}
 

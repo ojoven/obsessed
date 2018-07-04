@@ -2,24 +2,17 @@
 
 return array(
 
-	// Elements in list page
-	'url' => 'https://www.indiehackers.com/forum/newest/page/[page]',
+	// Configuration
+	'parameters' => array(
 
-	// Post in List
-	'postInList' => '.forum-list__thread-list > .forum-list__thread',
+		// URL
+		'url' => 'https://www.indiehackers.com/forum/newest/page/[page]',
 
-	// Get Properties from Posts in List
-	'postInListProperties' => array(
-		'title' => '.thread__details > a',
-		//'excerpt' => false,
-		//'img' => false,
-		'date' => '.thread__date',
-		'link' => '.thread__details > a',
-	),
+		// Parse?
+		'parseHTML' => true,
 
-	// Get Properties from Post in Single Page
-	'postInPageProperties' => array(
-		'content' => '.thread__content',
+		// Post in List
+		'postInList' => '.forum-list__thread-list > .forum-list__thread',
 	),
 
 	// Config Options
@@ -70,7 +63,6 @@ return array(
 			'available' => true,
 			'pathSingle' => '.thread__content',
 			'attribute' => 'innertext',
-			'parse' => true
 		),
 	)
 
