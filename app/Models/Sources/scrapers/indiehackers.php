@@ -13,6 +13,11 @@ return array(
 
 		// Post in List
 		'postInList' => '.forum-list__thread-list > .forum-list__thread',
+
+		// Update fields
+		'updateFields' => array(
+			'rating'
+		)
 	),
 
 	// Config Options
@@ -20,7 +25,7 @@ return array(
 
 		'external_id' => array(
 			'available' => true,
-			'pathList' => '.thread__details > a',
+			'pathList' => '.thread__details .thread__reply-count',
 			'attribute' => 'href',
 			'parse' => true
 		),
@@ -45,16 +50,16 @@ return array(
 			'attribute' => 'plaintext'
 		),
 
-		'date' => array(
+		'created_at' => array(
 			'available' => true,
 			'pathList' => '.thread__date',
 			'attribute' => 'title',
 			'parse' => true
 		),
 
-		'link' => array(
+		'url' => array(
 			'available' => true,
-			'pathList' => '.thread__details > a',
+			'pathList' => '.thread__details .thread__reply-count',
 			'attribute' => 'href',
 			'parse' => true
 		),
@@ -64,6 +69,13 @@ return array(
 			'pathSingle' => '.thread__content',
 			'attribute' => 'innertext',
 		),
+
+		'num_comments' => array(
+			'available' => true,
+			'pathList' => '.thread__reply-count',
+			'attribute' => 'plaintext',
+			'parse' => true
+		)
 	)
 
 );

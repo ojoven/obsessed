@@ -81,7 +81,6 @@ class Reddit extends Model implements SourceInterface {
 		}
 
 		return $posts;
-
 	}
 
 	public function parsePostsToDb($posts, $subreddit) {
