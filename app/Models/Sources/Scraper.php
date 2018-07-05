@@ -19,24 +19,35 @@ class Scraper implements SourceInterface {
 	protected $maxNumberDbPostsToFetch = 100;
 
 	public function addNewContent($sourceKey) {
-		
-		$this->sourceKey = $sourceKey;
-		$this->addNewPostsAndComments($sourceKey);
+
+		$this->initialize($sourceKey);
+		$this->addNewPosts();
+		$this->addNewComments();
 
 	}
 
-	public function addNewPostsAndComments($sourceKey) {
+	public function initialize($sourceKey) {
+
+		$this->sourceKey = $sourceKey;
 
 		// Load configuration file
-		$pathToConfigFile = app_path() . $this->pathToConfigFiles . $sourceKey . '.php';
+		$pathToConfigFile = app_path() . $this->pathToConfigFiles . $this->sourceKey . '.php';
 		if (!file_exists($pathToConfigFile)) return false;
 		$this->config = include($pathToConfigFile);
 
 		// Load parser file (if it exists)
-		$pathToParserFile = app_path() . $this->pathToParserFiles . $sourceKey . '.php';
+		$pathToParserFile = app_path() . $this->pathToParserFiles . $this->sourceKey . '.php';
 		if (file_exists($pathToParserFile)) {
 			require_once $pathToParserFile;
 		}
+
+	}
+
+	/**=====================================
+	 * POSTS
+	 *=====================================**/
+
+	public function addNewPosts() {
 
 		$this->page = 1;
 
@@ -65,12 +76,14 @@ class Scraper implements SourceInterface {
 
 	}
 
-	/** GET LATEST POSTS LIST **/
+	/** GET INFO LIST **/
 	public function getLatestPostsList() {
 
 		$posts = [];
 
-		$html = $this->getHtmlDom($this->config);
+		$url = $this->getUrl($this->config['parameters']['url'], $this->page);
+		$html = $this->getHtmlDom($url);
+
 		if (!$html) return $posts;
 
 		foreach ($html->find($this->config['parameters']['postInList']) as $postDom) {
@@ -86,6 +99,7 @@ class Scraper implements SourceInterface {
 		return $posts;
 	}
 
+	/** GET INFO SINGLE PAGE **/
 	public function getAdditionalInfoPostsOnSinglePages($posts) {
 
 		$posts = array_slice($posts, 0, 5);
@@ -99,11 +113,13 @@ class Scraper implements SourceInterface {
 		return $posts;
 	}
 
-	public function addFieldsInfoToPost($dom, $path, &$post = false) {
+	public function addFieldsInfoToPost($dom, $path, &$post = false, $arrayFields = false) {
 
 		if (!$post) $post = [];
 
 		foreach ($this->config['fieldsPost'] as $fieldName => $fieldAttributes) {
+
+			if ($arrayFields && !in_array($fieldName, $arrayFields)) continue; // We can get just a subarray of fields
 
 			if ($fieldAttributes['available'] && isset($fieldAttributes[$path])) {
 
@@ -112,7 +128,7 @@ class Scraper implements SourceInterface {
 				if (isset($fieldAttributes['parse']) && $fieldAttributes['parse']) {
 
 					// Call to parser function
-					$functionName = $this->sourceKey . '_' . $fieldName;
+					$functionName = $this->sourceKey . '_post_' . $fieldName;
 					if (function_exists($functionName)) {
 						$post[$fieldName] = $functionName($post[$fieldName]);
 					}
@@ -124,15 +140,14 @@ class Scraper implements SourceInterface {
 		return $post;
 	}
 
-	public function getHtmlDom($config) {
+	public function getHtmlDom($url) {
 
-		$url = $this->getUrl($config['parameters']['url'], $this->page);
 		$html = file_get_contents($url);
 
-		if (isset($config['parameters']['parseHTML'])
-			&& $config['parameters']['parseHTML']) {
+		if (isset($this->config['parameters']['parseHTML'])
+			&& $this->config['parameters']['parseHTML']) {
 
-			$functionName = $this->sourceKey . '_html';
+			$functionName = $this->sourceKey . '_post_html';
 			if (function_exists($functionName)) {
 				$html = $functionName($html);
 			}
@@ -182,6 +197,71 @@ class Scraper implements SourceInterface {
 
 		$result = Post::insert($posts);
 		return $result;
+	}
+
+	/**=====================================
+	 * COMMENTS
+	 *=====================================**/
+
+	public function addNewComments() {
+
+		$posts = $this->getPostsForWhichWeWillGetComments();
+
+		$html = $this->getHtmlDom($this->config);
+		if (!$html) return $posts;
+
+		foreach ($html->find($this->config['parameters']['postInList']) as $postDom) {
+
+			$post = $this->addFieldsInfoToPost($postDom, 'pathList');
+
+			$post['source_type'] = 'scraper';
+			$post['source_key'] = $this->sourceKey;
+
+			$posts[] = $post;
+		}
+
+		return $posts;
+
+	}
+
+	public function getPostsForWhichWeWillGetComments() {
+
+		$postsToBeCheckedFromScraping = $this->getPostsToBeCheckedFromScraping();
+		$postsSavedOnDb = $this->getPostsToBeCheckedFromDB($postsToBeCheckedFromScraping);
+
+	}
+
+	public function getPostsToBeCheckedFromScraping() {
+
+		$posts = [];
+		$externalIds = [];
+
+		$urls = $this->config['urlsComments'];
+		foreach ($urls as $url) {
+
+			$html = $this->getHtmlDom($url);
+			if (!$html) return $posts;
+
+			foreach ($html->find($this->config['parameters']['postInList']) as $postDom) {
+
+				$post = [];
+				$fields = ['external_id', 'num_comments'];
+				$post = $this->addFieldsInfoToPost($postDom, 'pathList', $post, $fields);
+
+				if (!in_array($post['external_id'], $externalIds)) { // Avoid duplicates
+					$externalIds[] = $post['external_id'];
+					$posts[] = $post;
+				}
+			}
+
+			return $posts;
+		}
+	}
+
+	public function getPostsToBeCheckedFromDB($postsScraping) {
+
+		$idPostsDb = Functions::getArrayValuesFromArrayIndex($postsScraping, 'external_id');
+		$postsToBeChecked = Post::whereIn('external_id', $idPostsDb)->get();
 	}
 
 }

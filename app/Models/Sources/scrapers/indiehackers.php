@@ -14,6 +14,15 @@ return array(
 		// Post in List
 		'postInList' => '.forum-list__thread-list > .forum-list__thread',
 
+		// Comment in List
+		'commentInList' => '.comment',
+
+		// URLs for comments
+		'urlsComments' => array(
+			'https://www.indiehackers.com/forum/newest/page/1', // Latest
+			'https://www.indiehackers.com/' // Top
+		),
+
 		// Update fields
 		'updateFields' => array(
 			'rating'
@@ -76,6 +85,50 @@ return array(
 			'attribute' => 'plaintext',
 			'parse' => true
 		)
+	),
+
+	'fieldsComment' => array(
+
+		'external_id' => array(
+			'available' => true,
+			'pathList' => '.footer__date',
+			'attribute' => 'href',
+			'parse' => true
+		),
+
+		// We already have the information from the post from which we're retrieving the comments
+		'reply_to_post_id' => array(
+			'available' => false,
+		),
+
+		'reply_to_comment_id' => array(
+			'available' => false,
+		),
+
+		'text' => array(
+			'available' => true,
+			'pathList' => '.comment__content',
+			'attribute' => 'innertext'
+		),
+
+		'url' => array(
+			'available' => true,
+			'pathList' => '.footer__date',
+			'attribute' => 'href',
+			'parse' => true
+		),
+
+		'rating' => array(
+			'available' => true,
+			'pathList' => '.comment-voter__score',
+			'attribute' => 'plaintext'
+		),
+
+		'created_at' => array(
+			'available' => true,
+			'pathList' => '.footer__date',
+			'attribute' => 'title'
+		),
 	)
 
 );
