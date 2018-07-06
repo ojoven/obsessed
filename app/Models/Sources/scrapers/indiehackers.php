@@ -91,7 +91,7 @@ return array(
 
 		'external_id' => array(
 			'available' => true,
-			'pathList' => '.footer__date',
+			'path' => '.footer__date',
 			'attribute' => 'href',
 			'parse' => true
 		),
@@ -107,27 +107,28 @@ return array(
 
 		'text' => array(
 			'available' => true,
-			'pathList' => '.comment__content',
+			'path' => '.comment__content',
 			'attribute' => 'innertext'
 		),
 
 		'url' => array(
 			'available' => true,
-			'pathList' => '.footer__date',
+			'path' => '.footer__date',
 			'attribute' => 'href',
 			'parse' => true
 		),
 
 		'rating' => array(
 			'available' => true,
-			'pathList' => '.comment-voter__score',
+			'path' => '.comment-voter__score',
 			'attribute' => 'plaintext'
 		),
 
 		'created_at' => array(
 			'available' => true,
-			'pathList' => '.footer__date',
-			'attribute' => 'title'
+			'path' => '.footer__date',
+			'attribute' => 'title',
+			'parse' => true
 		),
 	)
 

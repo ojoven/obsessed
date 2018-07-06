@@ -54,8 +54,13 @@ class PlaygroundController extends Controller {
 		}
 		 * **/
 
-		$html = file_get_contents('https://www.indiehackers.com/forum/newest/page/1');
-		$result = file_put_contents(app_path() . '/tmp/indiehackers.html', $html);
+		$html = file_get_contents('https://www.indiehackers.com/forum/show-ih-enlight-learn-to-code-by-building-projects-ff489ef284');
+		$htmlDom = SimpleHtmlDom::strGetHtml($html);
+		foreach ($htmlDom->find('.comment') as $comment) {
+			$commentText = SimpleHtmlDom::find($comment, '.comment__content', 0, 'innertext');
+		}
+
+		//$result = file_put_contents(app_path() . '/tmp/indiehackers.html', $html);
 
 		$data = [];
 		return view('index', $data);

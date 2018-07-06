@@ -4,6 +4,7 @@ namespace App\Models\Sources;
 
 use App\Lib\Functions;
 use App\Lib\SimpleHtmlDom;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\SourceInterface;
 
@@ -15,6 +16,7 @@ class Scraper implements SourceInterface {
 	protected $config;
 	protected $page;
 	protected $sourceKey;
+	protected $sourceType = 'scraper';
 
 	protected $maxNumberDbPostsToFetch = 100;
 
@@ -64,7 +66,7 @@ class Scraper implements SourceInterface {
 			$posts = $this->getPostsNotOnDb($postsScraping, $postsDb);
 
 			// Get additional information for each new post
-			$posts = $this->getAdditionalInfoPostsOnSinglePages($posts);
+			$posts = $this->handleInfoAndCommentsOnSinglePages($posts);
 
 			// Save to DB
 			$result = $this->savePostsToDb($posts);
@@ -90,7 +92,7 @@ class Scraper implements SourceInterface {
 
 			$post = $this->addFieldsInfoToPost($postDom, 'pathList');
 
-			$post['source_type'] = 'scraper';
+			$post['source_type'] = $this->sourceType;
 			$post['source_key'] = $this->sourceKey;
 
 			$posts[] = $post;
@@ -100,14 +102,21 @@ class Scraper implements SourceInterface {
 	}
 
 	/** GET INFO SINGLE PAGE **/
-	public function getAdditionalInfoPostsOnSinglePages($posts) {
+	public function handleInfoAndCommentsOnSinglePages($posts) {
 
 		$posts = array_slice($posts, 0, 5);
 
 		foreach ($posts as &$post) {
 
 			$htmlDom = SimpleHtmlDom::fileGetHtml($post['url']);
+
+			// Get additional info
 			$post = $this->addFieldsInfoToPost($htmlDom, 'pathSingle', $post);
+
+			// Add new comments
+			if ($post['num_comments'] !== 0) {
+				$this->addNewCommentsPost($post, $htmlDom);
+			}
 		}
 
 		return $posts;
@@ -167,7 +176,7 @@ class Scraper implements SourceInterface {
 
 	public function getSavedPostsDb() {
 
-		$posts = Post::where('source_type', 'scraper')
+		$posts = Post::where('source_type', $this->sourceType)
 			->where('source_key', $this->sourceKey)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
@@ -207,17 +216,9 @@ class Scraper implements SourceInterface {
 
 		$posts = $this->getPostsForWhichWeWillGetComments();
 
-		$html = $this->getHtmlDom($this->config);
-		if (!$html) return $posts;
+		foreach ($posts as $post) {
 
-		foreach ($html->find($this->config['parameters']['postInList']) as $postDom) {
-
-			$post = $this->addFieldsInfoToPost($postDom, 'pathList');
-
-			$post['source_type'] = 'scraper';
-			$post['source_key'] = $this->sourceKey;
-
-			$posts[] = $post;
+			$this->addNewCommentsPost($post);
 		}
 
 		return $posts;
@@ -226,9 +227,11 @@ class Scraper implements SourceInterface {
 
 	public function getPostsForWhichWeWillGetComments() {
 
-		$postsToBeCheckedFromScraping = $this->getPostsToBeCheckedFromScraping();
-		$postsSavedOnDb = $this->getPostsToBeCheckedFromDB($postsToBeCheckedFromScraping);
+		$postsScraping = $this->getPostsToBeCheckedFromScraping();
+		$postsDb = $this->getPostsToBeCheckedFromDB($postsScraping);
+		$postsWithNewComments = $this->getPostsWithNewComments($postsScraping, $postsDb);
 
+		return $postsWithNewComments;
 	}
 
 	public function getPostsToBeCheckedFromScraping() {
@@ -236,7 +239,7 @@ class Scraper implements SourceInterface {
 		$posts = [];
 		$externalIds = [];
 
-		$urls = $this->config['urlsComments'];
+		$urls = $this->config['parameters']['urlsComments'];
 		foreach ($urls as $url) {
 
 			$html = $this->getHtmlDom($url);
@@ -254,14 +257,137 @@ class Scraper implements SourceInterface {
 				}
 			}
 
-			return $posts;
 		}
+
+		return $posts;
 	}
 
 	public function getPostsToBeCheckedFromDB($postsScraping) {
 
 		$idPostsDb = Functions::getArrayValuesFromArrayIndex($postsScraping, 'external_id');
-		$postsToBeChecked = Post::whereIn('external_id', $idPostsDb)->get();
+		$postsToBeChecked = Post::whereIn('external_id', $idPostsDb)->get()->toArray();
+		return $postsToBeChecked;
+	}
+
+	public function getPostsWithNewComments($postsScraping, $postsDb) {
+
+		$postsWithNewComments = [];
+		foreach ($postsDb as $postDb) {
+
+			foreach ($postsScraping as $postScraping) {
+
+				if ($postDb['external_id'] === $postScraping['external_id']) {
+
+					if ($postDb['num_comments'] !== $postScraping['num_comments']) {
+						$postDb['num_comments_new'] = $postScraping['num_comments'];
+						$postsWithNewComments[] = $postDb;
+					}
+
+				}
+			}
+
+		}
+
+		return $postsWithNewComments;
+	}
+
+	public function addNewCommentsPost($post, $htmlDom = false) {
+
+		$commentsPost = $this->getNewCommentsPost($post, $htmlDom);
+		if (!$commentsPost) return;
+
+		$commentsPostDB = $this->getCommentsDB($post);
+		$comments = $this->getNewCommentsNotOnDB($commentsPost, $commentsPostDB);
+
+		if (!$comments) return;
+		$response = $this->saveCommentsToDB($comments, $post);
+	}
+
+	public function getNewCommentsPost($post, $html = false) {
+
+		if (!$html) $html = $this->getHtmlDom($post['url']);
+		if (!$html) return false;
+
+		$comments = [];
+
+		$pathToCommentInList = $this->config['parameters']['commentInList'];
+
+		foreach ($html->find($this->config['parameters']['commentInList']) as $commentDom) {
+			$comment = $this->addFieldsInfoToComment($commentDom);
+
+			$comment['reply_to_post_id'] = $post['external_id'];
+			// comment['reply_to_comment_id'] = TODO THIS.
+			$comment['source_type'] = $this->sourceType;
+			$comment['source_key'] = $this->sourceKey;
+
+			$comments[] = $comment;
+		}
+
+		return $comments;
+	}
+
+	public function addFieldsInfoToComment($dom) {
+
+		$comment = [];
+
+		foreach ($this->config['fieldsComment'] as $fieldName => $fieldAttributes) {
+
+			if ($fieldAttributes['available']) {
+
+				$position = isset($fieldAttributes['position']) ? $fieldAttributes['position'] : 0;
+				$comment[$fieldName] = SimpleHtmlDom::find($dom, $fieldAttributes['path'], $position, $fieldAttributes['attribute']);
+				if (isset($fieldAttributes['parse']) && $fieldAttributes['parse']) {
+
+					// Call to parser function
+					$functionName = $this->sourceKey . '_comment_' . $fieldName;
+					if (function_exists($functionName)) {
+						$comment[$fieldName] = $functionName($comment[$fieldName]);
+					}
+				}
+
+			}
+		}
+
+		return $comment;
+	}
+
+	public function getCommentsDB($post) {
+
+		$comments = Comment::where('reply_to_post_id', $post['external_id'])->get()->toArray();
+		return $comments;
+
+	}
+
+	public function getNewCommentsNotOnDB($commentsScraper, $commentsPostDB) {
+
+		$comments = [];
+		$idCommentsDb = Functions::getArrayValuesFromArrayIndex($commentsPostDB, 'external_id');
+
+		foreach ($commentsScraper as $commentScraper) {
+
+			$externalId = $commentScraper['external_id'];
+			if (!in_array($externalId, $idCommentsDb)) {
+				$comments[] = $commentScraper;
+			}
+
+		}
+
+		return $comments;
+	}
+
+	public function saveCommentsToDB($comments, $post) {
+
+		// Save comments in its table
+		$result = Comment::insert($comments);
+		if (!$result) return false;
+
+		// Save num_comments in post table
+		$result = Post::where('external_id', $post['external_id'])
+			->where('source_type', $this->sourceType)
+			->where('source_key', $this->sourceKey)
+			->update(array('num_comments' => $post['num_comments']));
+
+		return $result;
 	}
 
 }

@@ -22,7 +22,8 @@
 <body>
 
 <div class="main-wrapper home-1">
-    <!-- =========== Navigation Start ============ -->
+
+    <!-- NAVIGATION -->
     <header class="navigation navigation__transparent navigation__right navigation__landscape">
         <div class="container">
             <div class="row">
@@ -36,11 +37,15 @@
                             Obsessed Club
                         </a>
                         <button class="navigation__toggler"></button>
-                        <!-- offcanvas toggle button -->
+
+
                         <nav class="navigation-wrapper">
+
                             <button class="offcanvas__close">✕</button>
-                            <!-- offcanvas close button -->
+
+                            <!-- MENU OPTIONS -->
                             <ul class="navigation-menu" id="nav">
+
                                 <li class="navigation-menu__item">
                                     <a class="navigation-menu__link" href="#feature">Features</a>
                                 </li>
@@ -50,9 +55,11 @@
                                 <li class="navigation-menu__item">
                                     <a class="navigation-menu__link" href="#testimonial">Reviews</a>
                                 </li>
+
                                 <li class="navigation-menu__item">
+
                                     <a class="navigation-menu__link" href="#">Pages</a>
-                                    <!-- Dropdown main -->
+
                                     <ul class="navigation-dropdown">
                                         <li class="navigation-menu__item">
                                             <a class="navigation-menu__link" href="#">Blog</a>
@@ -77,6 +84,7 @@
                                                 </li>
                                             </ul>
                                         </li>
+
                                         <li class="navigation-menu__item">
                                             <a class="navigation-menu__link" href="#">Download</a>
                                             <ul class="navigation-dropdown algin-left">
@@ -89,19 +97,21 @@
                                             </ul>
 
                                         </li>
+
                                         <li class="navigation-menu__item">
                                             <a class="navigation-menu__link" href="reviews.html">Reviews Page</a>
                                         </li>
                                         <li class="navigation-menu__item">
                                             <a class="navigation-menu__link" href="404.html">Error 404</a>
                                         </li>
+
                                     </ul>
                                 </li>
                             </ul>
                         </nav>
-                        <!-- nav item end -->
+
                         <div class="navigation-button">
-                            <a href="#" class="db-btn db-btn__outline nav-cta-btn">Get obsessed for $5/mo</a>
+                            <a href="#" class="db-btn db-btn__outline nav-cta-btn">Feed your obsession for $5/mo</a>
                         </div>
                     </div>
                 </div>
@@ -109,9 +119,8 @@
             <!-- row end -->
         </div>
     </header>
-    <!-- =========== Navigation End ============ -->
 
-    <!-- =========== Hero Start ============ -->
+    <!-- HERO -->
     <section class="hero-one hero-text-light content-left">
         <div class="overlay"></div>
         <div class="container">
@@ -119,32 +128,38 @@
                 <div class="col-12">
                     <div class="hero">
                         <div class="hero-wrapper">
+
+                            <!-- CONTENT -->
                             <div class="hero-content">
-                                <h1 class="hero__title">Obsessed about Side Projects and Product Development?</h1>
-                                <p class="hero__caption">Feed your obsession. Say goodbye to FOMO. Get notified on every post and comment, video, or conversation on the Internet related to Side Projects.</p>
-                                <a href="#" class="db-btn db-btn__lemon db-btn__type-md">Get obsessed for $5/mo</a>
+                                <h1 class="hero__title">Obsessed about side projects and product dev?</h1>
+                                <p class="hero__caption">
+                                    Say goodbye to FOMO.<br>Get notified on every post and comment, video, or conversation on the Internet* related to side projects.
+                                    <span style="font-size: 12px" class="">* via email, push notification or via our timeline. Frequency adjustable.</span><br>
+                                </p>
+                                <a href="#" class="db-btn db-btn__lemon db-btn__type-md">Feed your obsession for $5/mo</a>
                             </div>
-                            <!-- hero content end -->
+
                         </div>
+
+                        <!-- IMAGE -->
                         <div class="hero-media">
                             <picture class="hero-media__img">
                                 <source srcset="img/hero-1.2.png" media="(min-width: 992px)">
                                 <img src="img/hero--smaller1.2.png" alt="hero-mobile">
                             </picture>
                         </div>
-                        <!-- media content end -->
+
                     </div>
                 </div>
             </div>
-            <!-- row end -->
+
         </div>
             <span class="hero__wave">
                 <img class="svg hero__wave--svg" src="/layout/hero-wave-1.svg" alt="hero-wave">
             </span>
     </section>
-    <!-- =========== Hero End ============ -->
 
-    <!-- =========== Features-1 Start ============ -->
+    <!-- FEATURES 1 -->
     <section class="features-one reveal">
         <div class="container">
             <div class="row">
@@ -177,29 +192,27 @@
                         <p class="feature__description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.</p>
                     </div>
                 </div>
-                <!-- single item end -->
             </div>
-            <!-- row end -->
         </div>
     </section>
-    <!-- =========== Features-1 End ============ -->
 
-    <!-- =========== Features-2 Start ============ -->
+    <!-- FEATURES 2 -->
     <section class="features-two" id="feature">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
                         <h2>A premium feeding service,
-                            <br>limited to 50 <strike>mad</strike> people all around the world</h2>
+                            <br>limited to 50 <strike>mad</strike> people <br>all around the world</h2>
                         <p>
-                            We're offering a premium service
+                            Cause we're different; different and powerful. We're going to do anything to pursue our dream of building the product that will give us money and power.
+                            <br><br>Get immersed in the product development world by joining our exclusive club.<br>Just 50 vacancies, 12 left.
                         </p>
                     </div>
                 </div>
-                <!-- section title end -->
+
             </div>
-            <!-- section title row end -->
+
             <div class="row">
                 <div class="col-12 col-md-11 offset-md-1">
                     <div class="feature-wrapper">
@@ -211,7 +224,7 @@
                                     <p class="feature__description">Big, small, online, offline, local or international. Size doesn't matter. We work on diverse projects for top brands.</p>
                                 </div>
                             </li>
-                            <!-- single item end -->
+
                             <li class="feature__list">
                                 <span class="feature__icon"></span>
                                 <div>
@@ -219,7 +232,7 @@
                                     <p class="feature__description">They're probably distracted too. Keep it simple and beautiful, fun and functional. Clean aesthetics supported.</p>
                                 </div>
                             </li>
-                            <!-- single item end -->
+
                             <li class="feature__list">
                                 <span class="feature__icon"></span>
                                 <div>
@@ -228,25 +241,23 @@
                                     </p>
                                 </div>
                             </li>
-                            <!-- single item end -->
+
                         </ul>
-                        <!-- feature content end -->
+
                         <div class="feature-media reveal">
                             <picture class="feature-media__img">
                                 <source srcset="img/features-2.1.png" media="(min-width: 768px)">
                                 <img src="img/features--smaller-2.1.png" alt="features--smaller">
                             </picture>
                         </div>
-                        <!-- media content end -->
+
                     </div>
                 </div>
             </div>
-            <!-- row end -->
         </div>
     </section>
-    <!-- =========== Features-2 End ============ -->
 
-    <!-- =========== Facts-1 Start ============ -->
+    <!-- FACTS -->
     <section class="facts-one">
         <div class="container">
             <div class="row">
@@ -257,36 +268,33 @@
                                     <img src="img/facts-1.1.png" alt="facts-img">
                                 </span>
                         </div>
-                        <!-- media content end -->
+
                         <div class="fact reveal">
                             <h2 class="fact__title">Never miss a conversation,
                                 <br> Get always step ahead.</h2>
                             <p class="fact__description">Sitting proudly atop M3565 is the two-storey penthouse. The master bedroom suite is phenomenally spacious and opens out to a breathtaking plunge pool and bar area that makes the most of its unrivalled position.
                             </p>
-                            <!-- text content end -->
 
                             <ul class="fact-counter">
                                 <li class="fact-counter__list">
                                     <span class="fact-counter__list-value">30</span>
                                     <span class="fact-counter__list-title">posts / minute</span>
                                 </li>
-                                <!-- counter single item end -->
+
                                 <li class="fact-counter__list">
                                     <span class="fact-counter__list-value">70K</span>
                                     <span class="fact-counter__list-title">Total posts</span>
                                 </li>
-                                <!-- counter single item end -->
+
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- row end -->
         </div>
     </section>
-    <!-- =========== Facts-2 End ============ -->
 
-    <!-- =========== How it work End ============ -->
+    <!-- HOW IT WORKS -->
     <section class="working-process" id="working-process">
         <div class="container">
             <div class="row">
@@ -574,7 +582,7 @@
                         <!-- media content end -->
 
                         <div class="newsletter-optin reveal">
-                            <h2 class="newsletter-optin__title">Download our free guide to manage your daily works.</h2>
+                            <h2 class="newsletter-optin__title">You have other obsessions?</h2>
                             <p class="newsletter-optin__description">A complete guide to manage daily routines.</p>
 
                             <form class="form newsletter-optin__form" action="#">
