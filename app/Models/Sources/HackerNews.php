@@ -8,56 +8,60 @@ use App\Models\Post;
 use App\Models\SourceInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Reddit extends Model implements SourceInterface {
+// https://hn.algolia.com/api
+// Rate limit: 10,000 requests / hour (same IP) 160 per minute
 
-	protected $sourceType = 'reddit';
+class HackerNews extends Model implements SourceInterface {
+
+	protected $sourceType = 'hackernews';
 	protected $maxNumberDbPostsToFetch = 100;
-	protected $urlBase = 'https://www.reddit.com';
+	protected $urlBase = 'https://news.ycombinator.com';
+	protected $apiUrlBase = 'http://hn.algolia.com/api/v1/search_by_date?tags=story&query=';
 
-	public function addNewContent($subreddit) {
+	public function addNewContent($query) {
 
-		$this->addNewPosts($subreddit);
-		$this->addNewComments($subreddit);
+		$this->addNewPosts($query);
+		//$this->addNewComments($query);
 	}
 
 	/**=====================================
 	 * POSTS
 	 *=====================================**/
 
-	public function addNewPosts($subreddit) {
+	public function addNewPosts($query) {
 
 		// Get the latest posts
-		$postsReddit = $this->getLatestPosts($subreddit);
+		$postsHN = $this->getLatestPosts($query);
 
 		// Get the saved posts
-		$postsDb = $this->getSavedPostsDb($subreddit);
+		$postsDb = $this->getSavedPostsDb($query);
 
 		// Filter just the new ones
-		$posts = $this->getPostsNotOnDb($postsReddit, $postsDb);
+		$posts = $this->getPostsNotOnDb($postsHN, $postsDb);
 
 		// With the new ones, we parse them
-		$posts = $this->parsePostsToDb($posts, $subreddit);
+		$posts = $this->parsePostsToDb($posts, $query);
 
 		// Once parsed, we save them
 		$result = $this->savePostsToDb($posts);
 
 	}
 
-	public function getLatestPosts($subreddit) {
+	public function getLatestPosts($query) {
 
-		$url = $this->urlBase . '/r/' . $subreddit . '/new.json?sort=new';
+		$url = $this->apiUrlBase . $query;
 		$json = file_get_contents($url);
 		$postsObject = json_decode($json, true);
 
-		$posts = $postsObject['data']['children'];
+		$posts = $postsObject['hits'];
 
 		return $posts;
 	}
 
-	public function getSavedPostsDb($subreddit) {
+	public function getSavedPostsDb($query) {
 
-		$posts = Post::where('source_type', 'reddit')
-			->where('source_key', $subreddit)
+		$posts = Post::where('source_type', 'hackernews')
+			->where('source_key', $query)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -65,17 +69,17 @@ class Reddit extends Model implements SourceInterface {
 
 	}
 
-	public function getPostsNotOnDb($postsReddit, $postsDb) {
+	public function getPostsNotOnDb($postsHN, $postsDb) {
 
 		$posts = [];
 
 		$idPostsDb = Functions::getArrayValuesFromArrayIndex($postsDb, 'external_id');
 
-		foreach ($postsReddit as $postReddit) {
+		foreach ($postsHN as $postHN) {
 
-			$externalId = $postReddit['data']['id'];
+			$externalId = $postHN['objectID'];
 			if (!in_array($externalId, $idPostsDb)) {
-				$posts[] = $postReddit;
+				$posts[] = $postHN;
 			}
 
 		}
@@ -83,29 +87,22 @@ class Reddit extends Model implements SourceInterface {
 		return $posts;
 	}
 
-	public function parsePostsToDb($posts, $subreddit) {
+	public function parsePostsToDb($posts, $query) {
 
 		$postsDb = array();
 
 		foreach ($posts as $post) {
 
-			$post = $post['data'];
-
-			$postDb['external_id'] = $post['id'];
+			$postDb['external_id'] = $post['objectID'];
 			$postDb['title'] = $post['title'];
-			$postDb['text'] = trim($post['url'] . ' ' . $post['selftext']);
-			$postDb['url'] = $this->urlBase . $post['permalink'];
-			$postDb['thumbnail'] = $post['thumbnail'];
-
-			if (isset($post['preview']['images'][0]['source']['url'])) {
-				$postDb['image'] = $post['preview']['images'][0]['source']['url'];
-			}
-
+			$postDb['text'] = trim($post['url'] . ' ' . $post['story_text']);
+			$postDb['url'] = $this->urlBase . '/item?id=' . $post['objectID'];
+			$postDb['num_comments'] = $post['num_comments'];
 			$postDb['author'] = $post['author'];
-			$postDb['rating'] = $post['score'];
+			$postDb['rating'] = $post['points'];
 			$postDb['source_type'] = $this->sourceType;
-			$postDb['source_key'] = $subreddit;
-			$postDb['created_at'] = date("Y-m-d H:i:s", $post["created_utc"]);
+			$postDb['source_key'] = $query;
+			$postDb['created_at'] = date("Y-m-d H:i:s", $post["created_at_i"]);
 
 			$postsDb[] = $postDb;
 		}
@@ -124,27 +121,27 @@ class Reddit extends Model implements SourceInterface {
 	 * COMMENTS
 	 *=====================================**/
 
-	public function addNewComments($subreddit) {
+	public function addNewComments($query) {
 
 		// Get the latest comments
-		$commentsReddit = $this->getLatestComments($subreddit);
+		$commentsHN = $this->getLatestComments($query);
 
 		// Get the saved comments
-		$commentsDb = $this->getSavedCommentsDb($subreddit);
+		$commentsDb = $this->getSavedCommentsDb($query);
 
 		// Filter just the new ones
-		$comments = $this->getCommentsNotOnDb($commentsReddit, $commentsDb);
+		$comments = $this->getCommentsNotOnDb($commentsHN, $commentsDb);
 
 		// With the new ones, we parse them
-		$comments = $this->parseCommentsToDb($comments, $subreddit);
+		$comments = $this->parseCommentsToDb($comments, $query);
 
 		// Once parsed, we save them
 		$result = $this->saveCommentsToDb($comments);
 	}
 
-	public function getLatestComments($subreddit) {
+	public function getLatestComments($query) {
 
-		$url = $this->urlBase . '/r/' . $subreddit . '/comments.json?sort=new';
+		$url = $this->urlBase . '/r/' . $query . '/comments.json?sort=new';
 		$json = file_get_contents($url);
 		$commentsObject = json_decode($json, true);
 
@@ -153,10 +150,10 @@ class Reddit extends Model implements SourceInterface {
 		return $comments;
 	}
 
-	public function getSavedCommentsDb($subreddit) {
+	public function getSavedCommentsDb($query) {
 
-		$comments = Comment::where('source_type', 'reddit')
-			->where('source_key', $subreddit)
+		$comments = Comment::where('source_type', 'hackernews')
+			->where('source_key', $query)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -164,17 +161,17 @@ class Reddit extends Model implements SourceInterface {
 
 	}
 
-	public function getCommentsNotOnDb($commentsReddit, $commentsDb) {
+	public function getCommentsNotOnDb($commentsHN, $commentsDb) {
 
 		$comments = [];
 
 		$idCommentsDb = Functions::getArrayValuesFromArrayIndex($commentsDb, 'external_id');
 
-		foreach ($commentsReddit as $commentReddit) {
+		foreach ($commentsHN as $commentHN) {
 
-			$externalId = $commentReddit['data']['id'];
+			$externalId = $commentHN['data']['id'];
 			if (!in_array($externalId, $idCommentsDb)) {
-				$comments[] = $commentReddit;
+				$comments[] = $commentHN;
 			}
 
 		}
@@ -183,7 +180,7 @@ class Reddit extends Model implements SourceInterface {
 
 	}
 
-	public function parseCommentsToDb($comments, $subreddit) {
+	public function parseCommentsToDb($comments, $query) {
 
 		$commentsDb = array();
 
@@ -193,15 +190,14 @@ class Reddit extends Model implements SourceInterface {
 
 			$commentDb['external_id'] = $comment['id'];
 			$commentDb['reply_to_post_id'] = $this->parseReplyToPostFromLinkId($comment['link_id']);
-			$commentDb['reply_to_comment_id'] = $this->parseReplyToCommentRedditFromParentId($comment['parent_id']);
+			$commentDb['reply_to_comment_id'] = $this->parseReplyToCommentHNFromParentId($comment['parent_id']);
 
 			$commentDb['text'] = $comment['body'];
 			$commentDb['url'] = $this->urlBase . $comment['permalink'];
 
-			$commentDb['author'] = $comment['author'];
 			$commentDb['rating'] = $comment['score'];
 			$commentDb['source_type'] = $this->sourceType;
-			$commentDb['source_key'] = $subreddit;
+			$commentDb['source_key'] = $query;
 			$commentDb['created_at'] = date("Y-m-d H:i:s", $comment["created_utc"]);
 
 			$commentsDb[] = $commentDb;
@@ -216,7 +212,7 @@ class Reddit extends Model implements SourceInterface {
 		return $replyToPostId;
 	}
 
-	public function parseReplyToCommentRedditFromParentId($commentParentId) {
+	public function parseReplyToCommentHNFromParentId($commentParentId) {
 
 		$replyToCommentId = null;
 		if (strpos($commentParentId, 't3_') !== false) { // If parent ID is the root post

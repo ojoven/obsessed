@@ -59,6 +59,12 @@ return array(
 			'attribute' => 'plaintext'
 		),
 
+		'author' => array(
+			'available' => true,
+			'pathList' => '.user-link__username',
+			'attribute' => 'plaintext'
+		),
+
 		'created_at' => array(
 			'available' => true,
 			'pathList' => '.thread__date',
@@ -121,6 +127,12 @@ return array(
 		'rating' => array(
 			'available' => true,
 			'path' => '.comment-voter__score',
+			'attribute' => 'plaintext'
+		),
+
+		'author' => array(
+			'available' => true,
+			'path' => '.user-link__username',
 			'attribute' => 'plaintext'
 		),
 

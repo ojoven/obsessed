@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Sources\HackerNews;
 use App\Models\Sources\Reddit;
 use App\Models\Sources\Scraper;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,11 @@ class Source extends Model {
 	public function addDataPerSource($source) {
 
 		switch($source['type']) {
+			case 'hackernews':
+				$hnModel = new HackerNews();
+				$hnModel->addNewContent($source['source_key']);
+				break;
+
 			case 'reddit':
 				$redditModel = new Reddit();
 				$redditModel->addNewContent($source['source_key']);
