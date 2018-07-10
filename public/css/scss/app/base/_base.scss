@@ -1,0 +1,64 @@
+// ==============================================
+// BASE STYLES
+// ==============================================
+
+// Vars
+$bodyBg: $white;
+
+html, body {
+	height: 100%;
+}
+
+body {
+	@extend %regular;
+	background: $bodyBg;
+}
+
+p {
+	@extend %regular;
+	font-size: 18px;
+}
+
+sup, sub {
+	font-size: 50%;
+	vertical-align: baseline;
+	position: relative;
+	top: -.7em;
+	left: .05em;
+}
+
+sub {
+	top: .4em;
+}
+
+a {
+	text-decoration: none;
+	color: $blackLight;
+}
+
+// ==============================================
+// IPAD PORTRAIT
+// ==============================================
+@include ipadPortrait {
+
+	html, body {
+		height: auto;
+	}
+
+}
+
+// ==============================================
+// MOBILE
+// ==============================================
+@include mobile {
+
+	h1, h2, h3 {
+		font-size: 22px;
+		line-height: 1.2;
+	}
+
+	hr {
+		height: 1px;
+		width: 90%;
+	}
+}

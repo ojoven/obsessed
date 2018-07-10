@@ -1,0 +1,56 @@
+/** RESET **/
+@import "base/reset";
+
+/** ABSTRACTS **/
+@import "abstracts/variables";
+@import "abstracts/media-declarations";
+@import "abstracts/mixins";
+@import "abstracts/colors";
+@import "abstracts/fonts";
+@import "abstracts/animations";
+@import "abstracts/z-index-layers";
+
+/* BASE STYLES */
+@import "base/base";
+@import "base/component-mixins";
+
+/** LAYOUT **/
+@import "layout/container";
+@import "layout/footer";
+@import "layout/grid";
+@import "layout/header";
+
+/** HELPERS **/
+@import "helpers/accessibility";
+@import "helpers/helpers";
+
+/** COMPONENTS **/
+@import "components/buttons";
+@import "components/icons";
+@import "components/links";
+@import "components/texts";
+
+/** PAGES **/
+@import "pages/timeline";
+@import "pages/notifications";
+@import "pages/profile";
+
+/** PRINT **/
+@import "helpers/print";
+
+/** I18N **/
+.fr {
+	// No _fr.scss file!
+	// We'll include the fr styles directly in its belonging file
+}
+
+/** SHAME **/
+// _shame.scss should be used for quick styling, if you don't know in which other file to place the styles
+// please avoid using it and try to keep it always empty!
+@import "helpers/shame";
+@import "helpers/ie"; // under the correct category :)
+
+/** MEDIA QUERIES **/
+// No media queries files!
+// All media queries should be included at the end of their belonging .scss component file
+// If you don't know where to place them, use shame.scss (but use it with caution and please

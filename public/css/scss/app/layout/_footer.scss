@@ -1,0 +1,57 @@
+// ==============================================
+// FOOTER
+// ==============================================
+
+// Footer
+footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background: $brandColor;
+	color: $white;
+
+	ul {
+		padding: 0;
+		margin: 0;
+	}
+
+	li {
+		float: left;
+		list-style: none;
+		display: block;
+		width: 33.33%;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+
+		// Menu option
+		a {
+			text-align: center;
+			font-size: 25px;
+			color: $white;
+			padding: 16px;
+			display: block;
+
+			span {
+				text-indent: -9999px;
+			}
+		}
+	}
+
+}
+
+// ==============================================
+// IPAD LANDSCAPE
+// ==============================================
+// @include ipadLandscape { }
+
+// ==============================================
+// IPAD PORTRAIT
+// ==============================================
+// @include ipadPortrait { }
+
+// ==============================================
+// MOBILE
+// ==============================================
+// @include mobile { }

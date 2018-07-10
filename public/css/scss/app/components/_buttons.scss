@@ -1,0 +1,40 @@
+// ==============================================
+// BUTTONS
+// ==============================================
+
+// Vars
+$btnMainTextColor: $white;
+$btnMainBg: #ccc;
+$btnMainBorder: $white;
+$btnMainHoverBg: #ccc;
+$btnMainHoverBorder: #ccc;
+
+// GENERAL BUTTON
+.btn {
+	@extend %bold;
+	@include transition(all .5s ease);
+	display: inline-block;
+	font-size: 16px;
+	line-height: 1.2;
+	padding: 10px 25px 10px 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+
+	// MAIN BUTTON
+	&.btn-main {
+		color: $btnMainTextColor;
+		border: 3px solid $btnMainBorder;
+
+		&:hover,
+		&:focus {
+			border-color: $btnMainHoverBorder;
+		}
+	}
+
+}
+
+// ==============================================
+// MOBILE
+// ==============================================
+// @include mobile { }

@@ -1,0 +1,41 @@
+// ==============================================
+// ACCESSIBILITY
+// ==============================================
+
+// Screen Reader Text: Not visible unless focused
+.srt {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute;
+	margin: 0;
+	padding: 0;
+
+	&:focus {
+		background-color: $greySilver;
+		border-radius: 3px;
+		clip: auto;
+		color: $black;
+		display: block;
+		font-size: 14px;
+		font-weight: bold;
+		height: auto;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		position: absolute;
+		left: 5px;
+		top: 5px;
+		text-decoration: none;
+		text-transform: none;
+		width: auto;
+		z-index: z($layers, topLevelElements);
+	}
+}
+
+// ==============================================
+// MOBILE
+// ==============================================
+@include mobile {
+
+	#skip-link {
+		display: none;
+	}
+}

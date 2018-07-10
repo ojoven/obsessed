@@ -1,0 +1,20 @@
+// sass-lint:disable no-vendor-prefixes
+// ==============================================
+// HELPERS
+// ==============================================
+// General classes used along the whole site + other specific helper classes
+
+// Hiding elements
+.hidden {
+	display: none !important;
+}
+
+// Form styling
+input {
+	-webkit-appearance: none;
+	border-radius: 0;
+
+	&[type='checkbox'] {
+		-webkit-appearance: checkbox;
+	}
+}

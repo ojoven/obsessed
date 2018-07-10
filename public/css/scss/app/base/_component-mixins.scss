@@ -1,0 +1,29 @@
+// ==============================================
+// COMPONENT MIXINS (CUSTOM WEBCOMPONENTS)
+// ==============================================
+
+// CLEAR FIX (Fix height after floats)
+%clearfix {
+	&::after {
+		content: ' ';
+		display: table;
+		clear: both;
+	}
+}
+
+// ==============================================
+// MOBILE
+// ==============================================
+@include mobile {
+
+	// Clear fix extendable from mobile media queries
+	%clearfixmobile {
+
+		&::after {
+			content: ' ';
+			display: table;
+			clear: both;
+		}
+	}
+
+}

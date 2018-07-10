@@ -1,0 +1,14 @@
+// ==============================================
+// PRINT
+// ==============================================
+
+.just-print {
+	display: none !important;
+}
+
+@media print {
+
+	.just-print {
+		display: block !important;
+	}
+}

@@ -1,0 +1,46 @@
+// ==============================================
+// TIMELINE
+// ==============================================
+
+.timeline-wrapper {
+
+	// Remove bullets from all lists
+	li {
+		list-style: none;
+	}
+
+}
+
+.content-wrapper {
+	padding: 20px;
+	display: block;
+}
+
+.post {
+
+	border-bottom: 4px solid $creamFoam;
+
+	.header {
+		@extend %light;
+		font-size: 12px;
+	}
+
+	.author {
+
+	}
+
+	.title {
+		@extend %bold;
+		font-size: 16px;
+		margin: 5px 0 10px;
+		color: $black;
+	}
+
+	.body {
+
+		p {
+			@extend %light;
+			font-size: 14px;
+		}
+	}
+}
