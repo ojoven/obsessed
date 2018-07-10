@@ -32,6 +32,13 @@
         </li>
 
         <li>
+            <a class="menu-timeline" href="/statistics">
+                <i class="fa fa-bar-chart"></i>
+                <span class="srt">Statistics</span>
+            </a>
+        </li>
+
+        <li>
             <a class="menu-notifications" href="/notifications">
                 <i class="fa fa-bell"></i>
                 <span class="srt">Notifications</span>

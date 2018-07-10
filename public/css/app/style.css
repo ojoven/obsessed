@@ -7,11 +7,11 @@ h2, h3, h4 { font-weight: normal; }
 
 /** ABSTRACTS **/
 @font-face { font-family: "LaramiePro Regular"; src: url("fonts/LaramiePro-Regular.eot"); src: url("fonts/LaramiePro-Regular.eot?#iefix") format("embedded-opentype"), url("fonts/LaramiePro-Regular.woff") format("woff"), url("fonts/LaramiePro-Regular.ttf") format("truetype"), url("fonts/LaramiePro-Regular.svg#LaramiePro Regular") format("svg"); font-weight: normal; font-style: normal; }
-.post .header, .post .body p { font-family: 'Fira Sans', sans-serif; font-weight: 300; }
+.content .header, .content .body p { font-family: 'Fira Sans', sans-serif; font-weight: 300; }
 
 body, p { font-family: 'Fira Sans', sans-serif; font-weight: 400; }
 
-.btn, .post .title { font-family: 'Fira Sans', sans-serif; font-weight: 700; }
+.btn, .content .title, .content .to-post { font-family: 'Fira Sans', sans-serif; font-weight: 700; }
 
 @-moz-keyframes scale { 0% { -webkit-transform: scale(0, 0); transform: scale(0, 0); }
   70% { -webkit-transform: scale(1.1, 1.1); transform: scale(1.1, 1.1); }
@@ -69,7 +69,7 @@ a { text-decoration: none; color: #444; }
 @media screen and (max-width: 910px) { .container { max-width: 100%; padding: 0 1.5%; } }
 footer { width: 100%; position: fixed; bottom: 0; left: 0; background: #edae49; color: #fff; }
 footer ul { padding: 0; margin: 0; }
-footer li { float: left; list-style: none; display: block; width: 33.33%; margin: 0; padding: 0; box-sizing: border-box; }
+footer li { float: left; list-style: none; display: block; width: 25%; margin: 0; padding: 0; box-sizing: border-box; }
 footer li a { text-align: center; font-size: 25px; color: #fff; padding: 16px; display: block; }
 footer li a span { text-indent: -9999px; }
 
@@ -96,10 +96,14 @@ input[type='checkbox'] { -webkit-appearance: checkbox; }
 
 .content-wrapper { padding: 20px; display: block; }
 
-.post { border-bottom: 4px solid #eaf7fd; }
-.post .header { font-size: 12px; }
-.post .title { font-size: 16px; margin: 5px 0 10px; color: #000; }
-.post .body p { font-size: 14px; }
+.content { border-bottom: 4px solid #eaf7fd; }
+.content .header { font-size: 12px; }
+.content .title { font-size: 16px; margin: 5px 0 10px; color: #000; }
+.content .thumbnail { width: 100%; height: 50px; background-size: cover; background-repeat: no-repeat; background-position: center center; margin: 10px 0; border-radius: 6px; }
+.content .body p { font-size: 14px; }
+.content .to-post { font-size: 12px; margin: 5px 0 10px; color: #000; }
+
+.comment .body p { padding-left: 20px; border-left: 4px solid #eaf7fd; }
 
 /** PRINT **/
 .just-print { display: none !important; }
