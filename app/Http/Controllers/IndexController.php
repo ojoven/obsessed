@@ -22,4 +22,23 @@ class IndexController extends Controller {
 
 	}
 
+	/** LOGGED IN **/
+	public function timeline() {
+
+		$data = [];
+		return view('timeline', $data);
+	}
+
+	public function notifications() {
+
+		$data = [];
+		return view('notifications', $data);
+	}
+
+	public function profile() {
+
+		$data = [];
+		return view('profile', $data);
+	}
+
 }

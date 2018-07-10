@@ -15,5 +15,10 @@
 Route::get('/', 'IndexController@index');
 Route::get('/update', 'IndexController@update');
 
+// LOGGED IN
+Route::get('/timeline', 'IndexController@timeline');
+Route::get('/notifications', 'IndexController@notifications');
+Route::get('/profile', 'IndexController@profile');
+
 // PLAYGROUND ENDPOINTS
 Route::get('/playground', 'PlaygroundController@playground');

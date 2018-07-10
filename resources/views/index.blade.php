@@ -15,7 +15,7 @@
     <!-- Fonts CSS -->
     <link href="/fonts/SFProDisplay.css" rel="stylesheet">
     <!-- Style CSS -->
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/landing/style.css">
 
 </head>
 
