@@ -18,3 +18,8 @@ input {
 		-webkit-appearance: checkbox;
 	}
 }
+
+.center {
+	position: absolute;
+	top: calc(50% - 10px);
+}

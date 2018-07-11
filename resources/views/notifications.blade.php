@@ -20,17 +20,20 @@
 
                     <li class="timeline">
                         <i class="fa fa-th-list"></i>
-                        <input type="checkbox" value=""/>
+                        <input id="notification-timeline" type="checkbox" value=""/>
+                        <label for="notification-timeline" class="toggle"><span></span></label>
                     </li>
 
                     <li class="push">
                         <i class="fa fa-mobile-phone"></i>
-                        <input type="checkbox" value=""/>
+                        <input id="notification-push" type="checkbox" value=""/>
+                        <label for="notification-push" class="toggle"><span></span></label>
                     </li>
 
                     <li class="email">
                         <i class="fa fa-envelope-o"></i>
-                        <input type="checkbox" value=""/>
+                        <input id="notification-email" type="checkbox" value=""/>
+                        <label for="notification-email" class="toggle"><span></span></label>
                     </li>
 
                 </ul>
