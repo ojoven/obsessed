@@ -1,14 +1,10 @@
 @extends('layouts.in')
-@section('class', 'timeline')
+@section('class', 'page-timeline')
 
 @section('content')
 
     <!-- TIMELINE -->
     <section class="timeline-wrapper container">
-
-        <header class="statistics">
-
-        </header>
 
         <ul class="timeline">
 

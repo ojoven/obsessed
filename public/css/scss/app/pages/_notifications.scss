@@ -1,3 +1,52 @@
 // ==============================================
 // NOTIFICATIONS
 // ==============================================
+
+.notifications {
+
+	width: 600px;
+	margin: 0 auto;
+	max-width: 95%;
+
+}
+
+.notification {
+
+	list-style: none;
+
+	.title {
+		max-width: 70%;
+		float: left;
+		position: relative;
+		top: 40px;
+	}
+
+	.options {
+		float: right;
+		max-width: 30%;
+
+		li {
+			list-style: none;
+			font-size: 25px;
+			display: inline-block;
+			text-align: center;
+			margin-right: 5px;
+
+			&.timeline { font-size: 19px; }
+			&.email { font-size: 21px; }
+			&.push {
+				font-size: 27px;
+				i {
+					position: relative;
+					top: 7px;
+				}
+			}
+
+			i {
+				display: block;
+				margin-bottom: 5px;
+			}
+		}
+	}
+
+}

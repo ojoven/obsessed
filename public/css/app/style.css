@@ -105,6 +105,18 @@ input[type='checkbox'] { -webkit-appearance: checkbox; }
 
 .comment .body p { padding-left: 20px; border-left: 4px solid #eaf7fd; }
 
+.notifications { width: 600px; margin: 0 auto; max-width: 95%; }
+
+.notification { list-style: none; }
+.notification .title { max-width: 70%; float: left; position: relative; top: 40px; }
+.notification .options { float: right; max-width: 30%; }
+.notification .options li { list-style: none; font-size: 25px; display: inline-block; text-align: center; margin-right: 5px; }
+.notification .options li.timeline { font-size: 19px; }
+.notification .options li.email { font-size: 21px; }
+.notification .options li.push { font-size: 27px; }
+.notification .options li.push i { position: relative; top: 7px; }
+.notification .options li i { display: block; margin-bottom: 5px; }
+
 /** PRINT **/
 .just-print { display: none !important; }
 
