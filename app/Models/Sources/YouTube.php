@@ -16,7 +16,7 @@ class YouTube extends Model {
 
 	protected $apiKey;
 	protected $maxNumberDbPostsToFetch = 100;
-	protected $apiUrlSearch = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=50&type=video';
+	protected $apiUrlSearch = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=50&type=video&order=date';
 	protected $apiUrlVideos = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=';
 	protected $apiUrlComments = 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&maxResults=100&order=time&videoId=';
 	protected $urlBase = 'https://www.youtube.com/';
