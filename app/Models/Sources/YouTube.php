@@ -254,13 +254,15 @@ class YouTube extends Model {
 			$comment['external_id'] = $thread['id'];
 			$comment['reply_to_post_id'] = $thread['snippet']['videoId'];
 			$comment['reply_to_comment_id'] = null;
-			$comment['text'] = $thread['snippet']['textDisplay'];
+			$topLevelComment = $thread['snippet']['topLevelComment']['snippet'];
+			$comment['text'] = $topLevelComment['textDisplay'];
 			$comment['url'] = $this->urlBase . 'watch?v=' . $comment['reply_to_post_id'];
-			$comment['author'] = $comment['snippet']['authorDisplayName'];
-			$comment['rating'] = $comment['snippet']['likeCount'];
+			$comment['author'] = $topLevelComment['authorDisplayName'];
+			$comment['author_image'] = $topLevelComment['authorProfileImageUrl'];
+			$comment['rating'] = $topLevelComment['likeCount'];
 			$comment['source_type'] = $this->sourceType;
 			$comment['source_key'] = $this->sourceKey;
-			$comment['created_at'] = date("Y-m-d H:i:s", strtotime($comment['snippet']['publishedAt']));
+			$comment['created_at'] = date("Y-m-d H:i:s", strtotime($topLevelComment['publishedAt']));
 
 			$comments[] = $comment;
 
@@ -276,6 +278,7 @@ class YouTube extends Model {
 					$comment['text'] = $reply['snippet']['textDisplay'];
 					$comment['url'] = $this->urlBase . 'watch?v=' . $comment['reply_to_post_id'];
 					$comment['author'] = $reply['snippet']['authorDisplayName'];
+					$comment['author_image'] = $reply['snippet']['authorProfileImageUrl'];
 					$comment['rating'] = $reply['snippet']['likeCount'];
 					$comment['source_type'] = $this->sourceType;
 					$comment['source_key'] = $this->sourceKey;
