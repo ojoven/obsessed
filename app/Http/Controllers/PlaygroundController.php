@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Sources\YouTube;
 use Reddit\Api\Client;
 use App\Lib\DateFunctions;
 use App\Lib\Functions;
@@ -52,8 +53,6 @@ class PlaygroundController extends Controller {
 			$loop = false;
 
 		}
-		 * **/
-
 
 		$html = file_get_contents('https://medium.com/topic/entrepreneurship');
 		$htmlDom = SimpleHtmlDom::strGetHtml($html);
@@ -61,8 +60,13 @@ class PlaygroundController extends Controller {
 			$title = SimpleHtmlDom::find($post, '.ui-h3', 0, 'plaintext');
 			echo $title . '<br>';
 		}
+		 * 		 * **/
 
 		//$result = file_put_contents(app_path() . '/tmp/indiehackers.html', $html);
+
+		$youTubeModel = new YouTube();
+		$youTubeModel->initialize('channel');
+		$postsWithComments = $youTubeModel->getPostsForWhichWeWillGetComments('UCSw5U1MuzDED2Nvlx9m65-Q');
 
 		$data = [];
 		return view('index', $data);

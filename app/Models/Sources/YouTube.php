@@ -12,20 +12,23 @@ class YouTube extends Model {
 	protected $sourceType = 'youtube';
 	protected $subtype = 'channel'; // default, can be also 'search'
 	protected $apiKey;
+	protected $sourceKey;
 	protected $maxNumberDbPostsToFetch = 100;
 	protected $apiUrlSearch = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=50&type=video';
 	protected $apiUrlVideos = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=';
+	protected $apiUrlComments = 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&maxResults=100&order=time&videoId=';
 	protected $urlBase = 'https://www.youtube.com/';
 
-	public function addNewContent($query, $subtype) {
+	public function addNewContent($sourceKey, $subtype) {
 
-		$this->initialize($subtype);
-		$this->addNewPosts($query);
-		//$this->addNewComments($query);
+		$this->initialize($sourceKey, $subtype);
+		$this->addNewPosts();
+		$this->addNewComments();
 	}
 
-	public function initialize($subtype) {
+	public function initialize($sourceKey, $subtype) {
 
+		$this->sourceKey = $sourceKey;
 		$this->apiKey = config('youtube.apiKey');
 		$this->subtype = $subtype;
 	}
@@ -34,29 +37,29 @@ class YouTube extends Model {
 	 * POSTS
 	 *=====================================**/
 
-	public function addNewPosts($query) {
+	public function addNewPosts() {
 
 		// Get the latest posts
-		$postsYouTube = $this->getLatestPosts($query);
+		$postsYouTube = $this->getLatestPosts();
 
 		// Get the saved posts
-		$postsDb = $this->getSavedPostsDb($query);
+		$postsDb = $this->getSavedPostsDb();
 
 		// Filter just the new ones
 		$posts = $this->getPostsNotOnDb($postsYouTube, $postsDb);
 
 		// With the new ones, we parse them
-		$posts = $this->parsePostsToDb($posts, $query);
+		$posts = $this->parsePostsToDb($posts);
 
 		// Once parsed, we save them
 		$result = $this->savePostsToDb($posts);
 
 	}
 
-	public function getLatestPosts($query) {
+	public function getLatestPosts() {
 
 		// First we get the IDs of the videos
-		$postIds = $this->getLatestPostsIds($query);
+		$postIds = $this->getLatestPostsIds();
 
 		// Now we get the whole posts with postIds
 		$posts = $this->getPostsFromPostIds($postIds);
@@ -64,10 +67,10 @@ class YouTube extends Model {
 		return $posts;
 	}
 
-	public function getLatestPostsIds($query) {
+	public function getLatestPostsIds() {
 
 		$paramName = ($this->subtype === 'channel') ? 'channelId' : 's';
-		$url = $this->apiUrlSearch . '&' . $paramName . '=' . $query . '&key=' . $this->apiKey;
+		$url = $this->apiUrlSearch . '&' . $paramName . '=' . $this->sourceKey . '&key=' . $this->apiKey;
 		$json = file_get_contents($url);
 		$postsObject = json_decode($json, true);
 		$posts = $postsObject['items'];
@@ -91,10 +94,10 @@ class YouTube extends Model {
 		return $posts;
 	}
 
-	public function getSavedPostsDb($query) {
+	public function getSavedPostsDb() {
 
 		$posts = Post::where('source_type', 'youtube')
-			->where('source_key', $query)
+			->where('source_key', $this->sourceKey)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -120,7 +123,7 @@ class YouTube extends Model {
 		return $posts;
 	}
 
-	public function parsePostsToDb($posts, $query) {
+	public function parsePostsToDb($posts) {
 
 		$postsDb = array();
 
@@ -139,7 +142,7 @@ class YouTube extends Model {
 
 			$postDb['rating'] = $post['statistics']['likeCount'];
 			$postDb['source_type'] = $this->sourceType;
-			$postDb['source_key'] = $query;
+			$postDb['source_key'] = $this->sourceKey;
 			$postDb['created_at'] = date("Y-m-d H:i:s", strtotime($snippet["publishedAt"]));
 
 			$postsDb[] = $postDb;
@@ -159,105 +162,158 @@ class YouTube extends Model {
 	 * COMMENTS
 	 *=====================================**/
 
-	public function addNewComments($query) {
+	public function addNewComments() {
 
-		// Get the latest comments
-		$commentsHN = $this->getLatestComments($query);
+		$posts = $this->getPostsForWhichWeWillGetComments();
 
-		// Get the saved comments
-		$commentsDb = $this->getSavedCommentsDb($query);
+		foreach ($posts as $post) {
 
-		// Filter just the new ones
-		$comments = $this->getCommentsNotOnDb($commentsHN, $commentsDb);
+			$this->addNewCommentsPost($post);
+		}
 
-		// With the new ones, we parse them
-		$comments = $this->parseCommentsToDb($comments, $query);
+		return $posts;
 
-		// Once parsed, we save them
-		$result = $this->saveCommentsToDb($comments);
 	}
 
-	public function getLatestComments($query) {
+	public function getPostsForWhichWeWillGetComments() {
 
-		$url = $this->urlBase . '/r/' . $query . '/comments.json?sort=new';
+		$postsDb = $this->getPostsToBeCheckedFromDB();
+		$postsYouTube = $this->getPostsUpToDateYouTube($postsDb);
+		$postsWithNewComments = $this->getPostsWithNewComments($postsYouTube, $postsDb);
+
+		return $postsWithNewComments;
+	}
+
+	public function getPostsToBeCheckedFromDB() {
+
+		$postsToBeChecked = Post::where('source_type', $this->sourceType)
+			->where('source_key', $this->sourceKey)->orderBy('num_comments', 'desc')->get()->toArray();
+		return $postsToBeChecked;
+	}
+
+	public function getPostsUpToDateYouTube($posts) {
+
+		$postIds = Functions::getArrayValuesFromArrayIndex($posts, 'external_id');
+		$posts = $this->getPostsFromPostIds($postIds);
+
+		return $posts;
+	}
+
+	public function getPostsWithNewComments($postsYouTube, $postsDb) {
+
+		$postsWithNewComments = [];
+		foreach ($postsDb as $postDb) {
+
+			foreach ($postsYouTube as $postYouTube) {
+
+				if ($postDb['external_id'] === $postYouTube['id']) {
+
+					if ((int) $postDb['num_comments'] !== (int) $postYouTube['statistics']['commentCount']) {
+						$postDb['num_comments_new'] = $postYouTube['statistics']['commentCount'];
+						$postsWithNewComments[] = $postDb;
+					}
+
+				}
+			}
+
+		}
+
+		return $postsWithNewComments;
+	}
+
+	public function addNewCommentsPost($post) {
+
+		$commentsPost = $this->getCommentsPost($post);
+		if (!$commentsPost) return;
+
+		$commentsPostDB = $this->getCommentsDB($post);
+		$comments = $this->getCommentsNotOnDB($commentsPost, $commentsPostDB);
+
+		if (!$comments) return;
+		$response = $this->saveCommentsToDB($comments, $post);
+	}
+
+	public function getCommentsPost($post) {
+
+		$url = $this->apiUrlComments . $post['external_id'] . '&key=' . $this->apiKey;
 		$json = file_get_contents($url);
-		$commentsObject = json_decode($json, true);
-
-		$comments = $commentsObject['data']['children'];
+		$postsObject = json_decode($json, true);
+		$threads = $postsObject['items'];
+		$comments = $this->parseThreadsToComments($threads);
 
 		return $comments;
 	}
 
-	public function getSavedCommentsDb($query) {
-
-		$comments = Comment::where('source_type', 'hackernews')
-			->where('source_key', $query)
-			->skip(0)->take($this->maxNumberDbPostsToFetch)
-			->get()->toArray();
-
-		return $comments;
-
-	}
-
-	public function getCommentsNotOnDb($commentsHN, $commentsDb) {
+	public function parseThreadsToComments($threads) {
 
 		$comments = [];
 
-		$idCommentsDb = Functions::getArrayValuesFromArrayIndex($commentsDb, 'external_id');
+		foreach ($threads as $thread) {
 
-		foreach ($commentsHN as $commentHN) {
+			$comment = [];
+			$comment['external_id'] = $thread['id'];
+			$comment['reply_to_post_id'] = $thread['snippet']['videoId'];
+			$comment['reply_to_comment_id'] = null;
+			$comment['text'] = $thread['snippet']['textDisplay'];
+			$comment['url'] = $this->urlBase . 'watch?v=' . $comment['reply_to_post_id'];
+			$comment['author'] = $comment['snippet']['authorDisplayName'];
+			$comment['rating'] = $comment['snippet']['likeCount'];
+			$comment['source_type'] = $this->sourceType;
+			$comment['source_key'] = $this->sourceKey;
+			$comment['created_at'] = date("Y-m-d H:i:s", strtotime($comment['snippet']['publishedAt']));
 
-			$externalId = $commentHN['data']['id'];
-			if (!in_array($externalId, $idCommentsDb)) {
-				$comments[] = $commentHN;
+			$comments[] = $comment;
+
+			// Let's save the replies
+			if (isset($thread['replies']['comments']) && $thread['replies']['comments']) {
+
+				foreach ($thread['replies']['comments'] as $reply) {
+
+					$comment = [];
+					$comment['external_id'] = $reply['id'];
+					$comment['reply_to_post_id'] = $reply['snippet']['videoId'];
+					$comment['reply_to_comment_id'] = $comment['external_id'];
+					$comment['text'] = $reply['snippet']['textDisplay'];
+					$comment['url'] = $this->urlBase . 'watch?v=' . $comment['reply_to_post_id'];
+					$comment['author'] = $reply['snippet']['authorDisplayName'];
+					$comment['rating'] = $reply['snippet']['likeCount'];
+					$comment['source_type'] = $this->sourceType;
+					$comment['source_key'] = $this->sourceKey;
+					$comment['created_at'] = date("Y-m-d H:i:s", strtotime($reply['snippet']['publishedAt']));
+
+					$comments[] = $comment;
+				}
+
 			}
 
 		}
 
 		return $comments;
+	}
+
+	public function getCommentsDB($post) {
+
+		$comments = Comment::where('reply_to_post_id', $post['external_id'])->get()->toArray();
+		return $comments;
 
 	}
 
-	public function parseCommentsToDb($comments, $query) {
+	public function getCommentsNotOnDb($commentsYouTube, $commentsDb) {
 
-		$commentsDb = array();
+		$comments = [];
 
-		foreach ($comments as $comment) {
+		$idCommentsDb = Functions::getArrayValuesFromArrayIndex($commentsDb, 'external_id');
 
-			$comment = $comment['data'];
+		foreach ($commentsYouTube as $commentYouTube) {
 
-			$commentDb['external_id'] = $comment['id'];
-			$commentDb['reply_to_post_id'] = $this->parseReplyToPostFromLinkId($comment['link_id']);
-			$commentDb['reply_to_comment_id'] = $this->parseReplyToCommentHNFromParentId($comment['parent_id']);
+			$externalId = $commentYouTube['id'];
+			if (!in_array($externalId, $idCommentsDb)) {
+				$comments[] = $commentYouTube;
+			}
 
-			$commentDb['text'] = $comment['body'];
-			$commentDb['url'] = $this->urlBase . $comment['permalink'];
-
-			$commentDb['rating'] = $comment['score'];
-			$commentDb['source_type'] = $this->sourceType;
-			$commentDb['source_key'] = $query;
-			$commentDb['created_at'] = date("Y-m-d H:i:s", $comment["created_utc"]);
-
-			$commentsDb[] = $commentDb;
 		}
 
-		return $commentsDb;
-	}
-
-	public function parseReplyToPostFromLinkId($commentLinkId) {
-
-		$replyToPostId = str_replace('t3_', '', $commentLinkId);
-		return $replyToPostId;
-	}
-
-	public function parseReplyToCommentHNFromParentId($commentParentId) {
-
-		$replyToCommentId = null;
-		if (strpos($commentParentId, 't3_') !== false) { // If parent ID is the root post
-			return $replyToCommentId;
-		} else {
-			return str_replace('t1_', '', $commentParentId);
-		}
+		return $comments;
 
 	}
 
