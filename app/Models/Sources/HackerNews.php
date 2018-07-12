@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 // https://hn.algolia.com/api
 // Rate limit: 10,000 requests / hour (same IP) 160 per minute
 
-class HackerNews extends Model implements SourceInterface {
+class HackerNews extends Model {
 
 	protected $sourceType = 'hackernews';
 	protected $maxNumberDbPostsToFetch = 100;

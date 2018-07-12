@@ -8,7 +8,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\SourceInterface;
 
-class Scraper implements SourceInterface {
+class Scraper {
 
 	protected $pathToConfigFiles = '/Models/Sources/scrapers/';
 	protected $pathToParserFiles = '/Models/Sources/parsers/';

@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\SourceInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Reddit extends Model implements SourceInterface {
+class Reddit extends Model {
 
 	protected $sourceType = 'reddit';
 	protected $maxNumberDbPostsToFetch = 100;
