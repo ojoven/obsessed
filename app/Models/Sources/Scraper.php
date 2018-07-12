@@ -134,6 +134,8 @@ class Scraper {
 
 				$position = isset($fieldAttributes['position']) ? $fieldAttributes['position'] : 0;
 				$post[$fieldName] = SimpleHtmlDom::find($dom, $fieldAttributes[$path], $position, $fieldAttributes['attribute']);
+				if ($post[$fieldName]) $post[$fieldName] = trim($post[$fieldName]);
+
 				if (isset($fieldAttributes['parse']) && $fieldAttributes['parse']) {
 
 					// Call to parser function
@@ -310,8 +312,6 @@ class Scraper {
 
 		$comments = [];
 
-		$pathToCommentInList = $this->config['parameters']['commentInList'];
-
 		foreach ($html->find($this->config['parameters']['commentInList']) as $commentDom) {
 			$comment = $this->addFieldsInfoToComment($commentDom);
 
@@ -336,6 +336,8 @@ class Scraper {
 
 				$position = isset($fieldAttributes['position']) ? $fieldAttributes['position'] : 0;
 				$comment[$fieldName] = SimpleHtmlDom::find($dom, $fieldAttributes['path'], $position, $fieldAttributes['attribute']);
+				if (isset($comment[$fieldName])) $comment[$fieldName] = trim($comment[$fieldName]);
+
 				if (isset($fieldAttributes['parse']) && $fieldAttributes['parse']) {
 
 					// Call to parser function

@@ -65,6 +65,12 @@ return array(
 			'attribute' => 'plaintext'
 		),
 
+		'author_image'  => array(
+			'available' => true,
+			'pathList' => '.user-avatar__img',
+			'attribute' => 'src'
+		),
+
 		'created_at' => array(
 			'available' => true,
 			'pathList' => '.thread__date',
@@ -133,6 +139,12 @@ return array(
 		'author' => array(
 			'available' => true,
 			'path' => '.user-link__username',
+			'attribute' => 'plaintext'
+		),
+
+		'author_image' => array(
+			'available' => true,
+			'path' => '.user-avatar__img',
 			'attribute' => 'plaintext'
 		),
 

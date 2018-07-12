@@ -11,5 +11,7 @@ We'll first create a working example, for people whose obsession is to write a b
 * Create timeline
 
 * Sources for "Side Project" obsession:
-- Done: Reddit, HackerNews, Indie Hackers
+- Done: Reddit, HackerNews, Indie Hackers, YouTube
 - TBD: Product Hunt, Medium, ChangeLog (https://changelog.com/founderstalk), https://newsapi.org/
+
+Mini TODOS:
