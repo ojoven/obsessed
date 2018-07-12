@@ -22,7 +22,7 @@ class Obsession extends Model {
 			// For each source, add new posts
 			foreach ($sources as $source) {
 
-				$sourceModel->addDataPerSource($source);
+				$sourceModel->addDataPerSource($source, $obsession);
 			}
 
 		}

@@ -11,41 +11,50 @@ use Illuminate\Database\Eloquent\Model;
 class Reddit extends Model {
 
 	protected $sourceType = 'reddit';
+	protected $sourceKey; // subreddit
+	protected $obsessionId;
 	protected $maxNumberDbPostsToFetch = 100;
 	protected $urlBase = 'https://www.reddit.com';
 
-	public function addNewContent($subreddit) {
+	public function addNewContent($sourceKey, $obsessionId) {
 
-		$this->addNewPosts($subreddit);
-		$this->addNewComments($subreddit);
+		$this->initialize($sourceKey, $obsessionId);
+		$this->addNewPosts();
+		$this->addNewComments();
+	}
+
+	public function initialize($sourceKey, $obsessionId) {
+
+		$this->sourceKey = $sourceKey;
+		$this->obsessionId = $obsessionId;
 	}
 
 	/**=====================================
 	 * POSTS
 	 *=====================================**/
 
-	public function addNewPosts($subreddit) {
+	public function addNewPosts() {
 
 		// Get the latest posts
-		$postsReddit = $this->getLatestPosts($subreddit);
+		$postsReddit = $this->getLatestPosts();
 
 		// Get the saved posts
-		$postsDb = $this->getSavedPostsDb($subreddit);
+		$postsDb = $this->getSavedPostsDb();
 
 		// Filter just the new ones
 		$posts = $this->getPostsNotOnDb($postsReddit, $postsDb);
 
 		// With the new ones, we parse them
-		$posts = $this->parsePostsToDb($posts, $subreddit);
+		$posts = $this->parsePostsToDb($posts);
 
 		// Once parsed, we save them
 		$result = $this->savePostsToDb($posts);
 
 	}
 
-	public function getLatestPosts($subreddit) {
+	public function getLatestPosts() {
 
-		$url = $this->urlBase . '/r/' . $subreddit . '/new.json?sort=new';
+		$url = $this->urlBase . '/r/' . $this->sourceKey . '/new.json?sort=new';
 		$json = file_get_contents($url);
 		$postsObject = json_decode($json, true);
 
@@ -54,10 +63,10 @@ class Reddit extends Model {
 		return $posts;
 	}
 
-	public function getSavedPostsDb($subreddit) {
+	public function getSavedPostsDb() {
 
 		$posts = Post::where('source_type', 'reddit')
-			->where('source_key', $subreddit)
+			->where('source_key', $this->sourceKey)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -83,7 +92,7 @@ class Reddit extends Model {
 		return $posts;
 	}
 
-	public function parsePostsToDb($posts, $subreddit) {
+	public function parsePostsToDb($posts) {
 
 		$postsDb = array();
 
@@ -104,7 +113,8 @@ class Reddit extends Model {
 			$postDb['author'] = $post['author'];
 			$postDb['rating'] = $post['score'];
 			$postDb['source_type'] = $this->sourceType;
-			$postDb['source_key'] = $subreddit;
+			$postDb['source_key'] = $this->sourceKey;
+			$postDb['obsession_id'] = $this->obsessionId;
 			$postDb['created_at'] = date("Y-m-d H:i:s", $post["created_utc"]);
 
 			$postsDb[] = $postDb;
@@ -124,27 +134,27 @@ class Reddit extends Model {
 	 * COMMENTS
 	 *=====================================**/
 
-	public function addNewComments($subreddit) {
+	public function addNewComments() {
 
 		// Get the latest comments
-		$commentsReddit = $this->getLatestComments($subreddit);
+		$commentsReddit = $this->getLatestComments();
 
 		// Get the saved comments
-		$commentsDb = $this->getSavedCommentsDb($subreddit);
+		$commentsDb = $this->getSavedCommentsDb();
 
 		// Filter just the new ones
 		$comments = $this->getCommentsNotOnDb($commentsReddit, $commentsDb);
 
 		// With the new ones, we parse them
-		$comments = $this->parseCommentsToDb($comments, $subreddit);
+		$comments = $this->parseCommentsToDb($comments);
 
 		// Once parsed, we save them
 		$result = $this->saveCommentsToDb($comments);
 	}
 
-	public function getLatestComments($subreddit) {
+	public function getLatestComments() {
 
-		$url = $this->urlBase . '/r/' . $subreddit . '/comments.json?sort=new';
+		$url = $this->urlBase . '/r/' . $this->sourceKey . '/comments.json?sort=new';
 		$json = file_get_contents($url);
 		$commentsObject = json_decode($json, true);
 
@@ -153,10 +163,10 @@ class Reddit extends Model {
 		return $comments;
 	}
 
-	public function getSavedCommentsDb($subreddit) {
+	public function getSavedCommentsDb() {
 
 		$comments = Comment::where('source_type', 'reddit')
-			->where('source_key', $subreddit)
+			->where('source_key', $this->sourceKey)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -183,7 +193,7 @@ class Reddit extends Model {
 
 	}
 
-	public function parseCommentsToDb($comments, $subreddit) {
+	public function parseCommentsToDb($comments) {
 
 		$commentsDb = array();
 
@@ -201,7 +211,8 @@ class Reddit extends Model {
 			$commentDb['author'] = $comment['author'];
 			$commentDb['rating'] = $comment['score'];
 			$commentDb['source_type'] = $this->sourceType;
-			$commentDb['source_key'] = $subreddit;
+			$commentDb['source_key'] = $this->sourceKey;
+			$commentDb['obsession_id'] = $this->obsessionId;
 			$commentDb['created_at'] = date("Y-m-d H:i:s", $comment["created_utc"]);
 
 			$commentsDb[] = $commentDb;

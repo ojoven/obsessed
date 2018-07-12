@@ -11,26 +11,30 @@ class YouTube extends Model {
 
 	protected $sourceType = 'youtube';
 	protected $subtype = 'channel'; // default, can be also 'search'
-	protected $apiKey;
 	protected $sourceKey;
+	protected $obsessionId;
+
+	protected $apiKey;
 	protected $maxNumberDbPostsToFetch = 100;
 	protected $apiUrlSearch = 'https://www.googleapis.com/youtube/v3/search?part=id&maxResults=50&type=video';
 	protected $apiUrlVideos = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=';
 	protected $apiUrlComments = 'https://www.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&maxResults=100&order=time&videoId=';
 	protected $urlBase = 'https://www.youtube.com/';
 
-	public function addNewContent($sourceKey, $subtype) {
+	public function addNewContent($sourceKey, $subtype, $obsessionId) {
 
-		$this->initialize($sourceKey, $subtype);
+		$this->initialize($sourceKey, $subtype, $obsessionId);
 		$this->addNewPosts();
 		$this->addNewComments();
 	}
 
-	public function initialize($sourceKey, $subtype) {
+	public function initialize($sourceKey, $subtype, $obsessionId) {
 
 		$this->sourceKey = $sourceKey;
-		$this->apiKey = config('youtube.apiKey');
 		$this->subtype = $subtype;
+		$this->obsessionId = $obsessionId;
+
+		$this->apiKey = config('youtube.apiKey');
 	}
 
 	/**=====================================
@@ -143,6 +147,7 @@ class YouTube extends Model {
 			$postDb['rating'] = $post['statistics']['likeCount'];
 			$postDb['source_type'] = $this->sourceType;
 			$postDb['source_key'] = $this->sourceKey;
+			$postDb['obsession_id'] = $this->obsessionId;
 			$postDb['created_at'] = date("Y-m-d H:i:s", strtotime($snippet["publishedAt"]));
 
 			$postsDb[] = $postDb;
@@ -262,6 +267,7 @@ class YouTube extends Model {
 			$comment['rating'] = $topLevelComment['likeCount'];
 			$comment['source_type'] = $this->sourceType;
 			$comment['source_key'] = $this->sourceKey;
+			$comment['obsession_id'] = $this->obsessionId;
 			$comment['created_at'] = date("Y-m-d H:i:s", strtotime($topLevelComment['publishedAt']));
 
 			$comments[] = $comment;
@@ -282,6 +288,7 @@ class YouTube extends Model {
 					$comment['rating'] = $reply['snippet']['likeCount'];
 					$comment['source_type'] = $this->sourceType;
 					$comment['source_key'] = $this->sourceKey;
+					$comment['obsession_id'] = $this->obsessionId;
 					$comment['created_at'] = date("Y-m-d H:i:s", strtotime($reply['snippet']['publishedAt']));
 
 					$comments[] = $comment;

@@ -17,28 +17,28 @@ class Source extends Model {
 		return $sources;
 	}
 
-	public function addDataPerSource($source) {
+	public function addDataPerSource($source, $obsession) {
 
 		switch($source['type']) {
 
 			case 'youtube':
 				$hnModel = new YouTube();
-				$hnModel->addNewContent($source['source_key'], $source['subtype']);
+				$hnModel->addNewContent($source['source_key'], $source['subtype'], $obsession['id']);
 				break;
 
 			case 'hackernews':
 				$hnModel = new HackerNews();
-				$hnModel->addNewContent($source['source_key']);
+				$hnModel->addNewContent($source['source_key'], $obsession['id']);
 				break;
 
 			case 'reddit':
 				$redditModel = new Reddit();
-				$redditModel->addNewContent($source['source_key']);
+				$redditModel->addNewContent($source['source_key'], $obsession['id']);
 				break;
 
 			case 'scraper':
 				$scraperModel = new Scraper();
-				$scraperModel->addNewContent($source['source_key']);
+				$scraperModel->addNewContent($source['source_key'], $obsession['id']);
 				break;
 		}
 

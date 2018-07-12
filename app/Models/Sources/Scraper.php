@@ -17,12 +17,13 @@ class Scraper {
 	protected $page;
 	protected $sourceKey;
 	protected $sourceType = 'scraper';
+	protected $obsessionId;
 
 	protected $maxNumberDbPostsToFetch = 100;
 
-	public function addNewContent($sourceKey) {
+	public function addNewContent($sourceKey, $obsessionId) {
 
-		$this->initialize($sourceKey);
+		$this->initialize($sourceKey, $obsessionId);
 		$this->addNewPosts();
 		$this->addNewComments();
 
@@ -31,6 +32,7 @@ class Scraper {
 	public function initialize($sourceKey) {
 
 		$this->sourceKey = $sourceKey;
+		$this->obsessionId = $obsessionId;
 
 		// Load configuration file
 		$pathToConfigFile = app_path() . $this->pathToConfigFiles . $this->sourceKey . '.php';
@@ -94,6 +96,7 @@ class Scraper {
 
 			$post['source_type'] = $this->sourceType;
 			$post['source_key'] = $this->sourceKey;
+			$post['obsession_id'] = $this->obsessionId;
 
 			$posts[] = $post;
 		}
@@ -319,6 +322,7 @@ class Scraper {
 			// comment['reply_to_comment_id'] = TODO THIS.
 			$comment['source_type'] = $this->sourceType;
 			$comment['source_key'] = $this->sourceKey;
+			$comment['obsession_id'] = $this->obsessionId;
 
 			$comments[] = $comment;
 		}

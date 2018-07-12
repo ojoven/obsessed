@@ -15,3 +15,6 @@ We'll first create a working example, for people whose obsession is to write a b
 - TBD: Product Hunt, Medium, ChangeLog (https://changelog.com/founderstalk), https://newsapi.org/
 
 Mini TODOS:
+- Get queue not published
+- Get last elements published
+- Pagination Scraper source

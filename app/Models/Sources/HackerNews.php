@@ -14,42 +14,51 @@ use Illuminate\Database\Eloquent\Model;
 class HackerNews extends Model {
 
 	protected $sourceType = 'hackernews';
+	protected $sourceKey;
+	protected $obsessionId;
 	protected $maxNumberDbPostsToFetch = 100;
 	protected $urlBase = 'https://news.ycombinator.com';
 	protected $apiUrlBase = 'http://hn.algolia.com/api/v1/search_by_date?tags=story&query=';
 
-	public function addNewContent($query) {
+	public function addNewContent($sourceKey, $obsessionId) {
 
+		$this->initialize($sourceKey, $obsessionId);
 		$this->addNewPosts($query);
 		//$this->addNewComments($query);
+	}
+
+	public function initialize($sourceKey, $obsessionId) {
+
+		$this->sourceKey = $sourceKey;
+		$this->obsessionId = $obsessionId;
 	}
 
 	/**=====================================
 	 * POSTS
 	 *=====================================**/
 
-	public function addNewPosts($query) {
+	public function addNewPosts() {
 
 		// Get the latest posts
-		$postsHN = $this->getLatestPosts($query);
+		$postsHN = $this->getLatestPosts();
 
 		// Get the saved posts
-		$postsDb = $this->getSavedPostsDb($query);
+		$postsDb = $this->getSavedPostsDb();
 
 		// Filter just the new ones
 		$posts = $this->getPostsNotOnDb($postsHN, $postsDb);
 
 		// With the new ones, we parse them
-		$posts = $this->parsePostsToDb($posts, $query);
+		$posts = $this->parsePostsToDb($posts);
 
 		// Once parsed, we save them
 		$result = $this->savePostsToDb($posts);
 
 	}
 
-	public function getLatestPosts($query) {
+	public function getLatestPosts() {
 
-		$url = $this->apiUrlBase . $query;
+		$url = $this->apiUrlBase . $this->sourceKey;
 		$json = file_get_contents($url);
 		$postsObject = json_decode($json, true);
 
@@ -58,10 +67,10 @@ class HackerNews extends Model {
 		return $posts;
 	}
 
-	public function getSavedPostsDb($query) {
+	public function getSavedPostsDb() {
 
 		$posts = Post::where('source_type', 'hackernews')
-			->where('source_key', $query)
+			->where('source_key', $this->sourceKey)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -87,7 +96,7 @@ class HackerNews extends Model {
 		return $posts;
 	}
 
-	public function parsePostsToDb($posts, $query) {
+	public function parsePostsToDb($posts) {
 
 		$postsDb = array();
 
@@ -101,7 +110,8 @@ class HackerNews extends Model {
 			$postDb['author'] = $post['author'];
 			$postDb['rating'] = $post['points'];
 			$postDb['source_type'] = $this->sourceType;
-			$postDb['source_key'] = $query;
+			$postDb['source_key'] = $this->sourceKey;
+			$postDb['obsession_id'] = $this->obsessionId;
 			$postDb['created_at'] = date("Y-m-d H:i:s", $post["created_at_i"]);
 
 			$postsDb[] = $postDb;
@@ -121,27 +131,27 @@ class HackerNews extends Model {
 	 * COMMENTS
 	 *=====================================**/
 
-	public function addNewComments($query) {
+	public function addNewComments() {
 
 		// Get the latest comments
-		$commentsHN = $this->getLatestComments($query);
+		$commentsHN = $this->getLatestComments();
 
 		// Get the saved comments
-		$commentsDb = $this->getSavedCommentsDb($query);
+		$commentsDb = $this->getSavedCommentsDb();
 
 		// Filter just the new ones
 		$comments = $this->getCommentsNotOnDb($commentsHN, $commentsDb);
 
 		// With the new ones, we parse them
-		$comments = $this->parseCommentsToDb($comments, $query);
+		$comments = $this->parseCommentsToDb($comments);
 
 		// Once parsed, we save them
 		$result = $this->saveCommentsToDb($comments);
 	}
 
-	public function getLatestComments($query) {
+	public function getLatestComments() {
 
-		$url = $this->urlBase . '/r/' . $query . '/comments.json?sort=new';
+		$url = $this->urlBase . '/r/' . $this->sourceKey . '/comments.json?sort=new';
 		$json = file_get_contents($url);
 		$commentsObject = json_decode($json, true);
 
@@ -150,10 +160,10 @@ class HackerNews extends Model {
 		return $comments;
 	}
 
-	public function getSavedCommentsDb($query) {
+	public function getSavedCommentsDb() {
 
 		$comments = Comment::where('source_type', 'hackernews')
-			->where('source_key', $query)
+			->where('source_key', $this->sourceKey)
 			->skip(0)->take($this->maxNumberDbPostsToFetch)
 			->get()->toArray();
 
@@ -180,7 +190,7 @@ class HackerNews extends Model {
 
 	}
 
-	public function parseCommentsToDb($comments, $query) {
+	public function parseCommentsToDb($comments) {
 
 		$commentsDb = array();
 
@@ -197,7 +207,8 @@ class HackerNews extends Model {
 
 			$commentDb['rating'] = $comment['score'];
 			$commentDb['source_type'] = $this->sourceType;
-			$commentDb['source_key'] = $query;
+			$commentDb['source_key'] = $this->sourceKey;
+			$commentDb['obsession_id'] = $this->obsessionId;
 			$commentDb['created_at'] = date("Y-m-d H:i:s", $comment["created_utc"]);
 
 			$commentsDb[] = $commentDb;
