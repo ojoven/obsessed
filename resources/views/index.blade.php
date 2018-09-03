@@ -24,17 +24,14 @@
 <div class="main-wrapper home-1">
 
     <!-- NAVIGATION -->
-    <header class="navigation navigation__transparent navigation__right navigation__landscape">
+    <header class="navigation navigation-text__dark navigation__transparent navigation__right navigation__landscape">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="navigation-content">
                         <a href="#" class="navigation__brand">
-                            <!--
-                            <img class="navigation-main__logo" src="img/brand-logo-white.png" alt="">
-                            <img class="sticky-nav__logo" src="img/brand-logo-white.png" alt="sticky logo">
-                            -->
-                            Obsessed Club
+                            <img class="navigation-main__logo" src="img/logo.png" alt="">
+                            <img class="sticky-nav__logo" src="img/logo.png" alt="sticky logo">
                         </a>
                         <button class="navigation__toggler"></button>
 
@@ -56,57 +53,6 @@
                                     <a class="navigation-menu__link" href="#testimonial">Reviews</a>
                                 </li>
 
-                                <li class="navigation-menu__item">
-
-                                    <a class="navigation-menu__link" href="#">Pages</a>
-
-                                    <ul class="navigation-dropdown">
-                                        <li class="navigation-menu__item">
-                                            <a class="navigation-menu__link" href="#">Blog</a>
-                                            <ul class="navigation-dropdown">
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="blog-right-sidebar.html">Blog Right Sidebar</a>
-                                                </li>
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                                                </li>
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="blog-full.html">Blog Full</a>
-                                                </li>
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="blog-details-right-sidebar.html">Blog details Right Sidebar</a>
-                                                </li>
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a>
-                                                </li>
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="blog-details-full.html">Blog Details Full</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="navigation-menu__item">
-                                            <a class="navigation-menu__link" href="#">Download</a>
-                                            <ul class="navigation-dropdown algin-left">
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="download.html">Download One</a>
-                                                </li>
-                                                <li class="navigation-menu__item">
-                                                    <a class="navigation-menu__link" href="download-2.html">Download Two</a>
-                                                </li>
-                                            </ul>
-
-                                        </li>
-
-                                        <li class="navigation-menu__item">
-                                            <a class="navigation-menu__link" href="reviews.html">Reviews Page</a>
-                                        </li>
-                                        <li class="navigation-menu__item">
-                                            <a class="navigation-menu__link" href="404.html">Error 404</a>
-                                        </li>
-
-                                    </ul>
-                                </li>
                             </ul>
                         </nav>
 
@@ -121,7 +67,7 @@
     </header>
 
     <!-- HERO -->
-    <section class="hero-one hero-text-light content-left">
+    <section class="hero-one hero-text-dark content-left">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -133,10 +79,10 @@
                             <div class="hero-content">
                                 <h1 class="hero__title">Obsessed about side projects and product dev?</h1>
                                 <p class="hero__caption">
-                                    Say goodbye to FOMO.<br>Get notified on every post and comment, video, or conversation on the Internet* related to side projects.
-                                    <span style="font-size: 12px" class="">* via email, push notification or via our timeline. Frequency adjustable.</span><br>
+                                    Get fed with every post and comment, video, or conversation on the Internet related to side projects.
+                                    <!--<span style="font-size: 12px" class="">* via email, push notification or via our timeline. Frequency adjustable.</span><br>-->
                                 </p>
-                                <a href="#" class="db-btn db-btn__lemon db-btn__type-md">Feed your obsession for $5/mo</a>
+                                <a href="#" class="db-btn db-btn__primary db-btn__type-md">Feed your obsession for $5/mo</a>
                             </div>
 
                         </div>
@@ -144,8 +90,7 @@
                         <!-- IMAGE -->
                         <div class="hero-media">
                             <picture class="hero-media__img">
-                                <source srcset="img/hero-1.2.png" media="(min-width: 992px)">
-                                <img src="img/hero--smaller1.2.png" alt="hero-mobile">
+                                <img src="img/obsessed_side.png" alt="hero-mobile">
                             </picture>
                         </div>
 
@@ -159,230 +104,112 @@
             </span>
     </section>
 
-    <!-- FEATURES 1 -->
+    <!-- SERVICES -->
     <section class="features-one reveal">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-4">
-                    <div class="feature">
-                            <span class="feature__icon">
-                                <i class="nc-icon nc-layers-3"></i>
-                            </span>
-                        <h5 class="feature__title">Easily Managable</h5>
-                        <p class="feature__description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.</p>
-                    </div>
-                </div>
-                <!-- single item end -->
-                <div class="col-12 col-md-4">
-                    <div class="feature">
-                            <span class="feature__icon">
-                                <i class="nc-icon nc-watch-circle"></i>
-                            </span>
-                        <h5 class="feature__title">Track Your Move</h5>
-                        <p class="feature__description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.</p>
-                    </div>
-                </div>
-                <!-- single item end -->
-                <div class="col-12 col-md-4">
-                    <div class="feature">
-                            <span class="feature__icon">
-                                <i class="nc-icon nc-chart-bar-33"></i>
-                            </span>
-                        <h5 class="feature__title">Complete Data</h5>
-                        <p class="feature__description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- FEATURES 2 -->
-    <section class="features-two" id="feature">
-        <div class="container">
-            <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>A premium feeding service,
-                            <br>limited to 50 <strike>mad</strike> people <br>all around the world</h2>
-                        <p>
-                            Cause we're different; different and powerful. We're going to do anything to pursue our dream of building the product that will give us money and power.
-                            <br><br>Get immersed in the product development world by joining our exclusive club.<br>Just 50 vacancies, 12 left.
-                        </p>
+                        <h2>The only, the unique, the timeline!</h2>
+                        <p>Oh, where should I go to get the latest info or to get the best conversations around side projecting? Don't think about it anymore. Every content piece that is posted on the Internet related to side projects will show up <b>in real time</b> in your timeline.</p>
                     </div>
+                </div>
+
+                <div class="mobile-container">
+                    <img class="mobile" src="https://static.vecteezy.com/system/resources/previews/000/081/526/non_2x/vector-iphone-6-white.jpg" />
                 </div>
 
             </div>
 
-            <div class="row">
-                <div class="col-12 col-md-11 offset-md-1">
-                    <div class="feature-wrapper">
-                        <ul class="feature">
-                            <li class="feature__list">
-                                <span class="feature__icon"></span>
-                                <div>
-                                    <h5 class="feature__title">Get your own time</h5>
-                                    <p class="feature__description">Big, small, online, offline, local or international. Size doesn't matter. We work on diverse projects for top brands.</p>
-                                </div>
-                            </li>
-
-                            <li class="feature__list">
-                                <span class="feature__icon"></span>
-                                <div>
-                                    <h5 class="feature__title">Easy User Interface</h5>
-                                    <p class="feature__description">They're probably distracted too. Keep it simple and beautiful, fun and functional. Clean aesthetics supported.</p>
-                                </div>
-                            </li>
-
-                            <li class="feature__list">
-                                <span class="feature__icon"></span>
-                                <div>
-                                    <h5 class="feature__title">Quick Access</h5>
-                                    <p class="feature__description">While designing residential property, a great emphasis is placed on infrastructure: landscaping design.
-                                    </p>
-                                </div>
-                            </li>
-
-                        </ul>
-
-                        <div class="feature-media reveal">
-                            <picture class="feature-media__img">
-                                <source srcset="img/features-2.1.png" media="(min-width: 768px)">
-                                <img src="img/features--smaller-2.1.png" alt="features--smaller">
-                            </picture>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- FACTS -->
-    <section class="facts-one">
+    <section class="features-one reveal">
+
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-10 offset-md-1">
-                    <div class="facts-wrapper">
-                        <div class="facts-media">
-                                <span class="facts-media__img">
-                                    <img src="img/facts-1.1.png" alt="facts-img">
-                                </span>
-                        </div>
 
-                        <div class="fact reveal">
-                            <h2 class="fact__title">Never miss a conversation,
-                                <br> Get always step ahead.</h2>
-                            <p class="fact__description">Sitting proudly atop M3565 is the two-storey penthouse. The master bedroom suite is phenomenally spacious and opens out to a breathtaking plunge pool and bar area that makes the most of its unrivalled position.
-                            </p>
+            <div class="row justify-content-md-center">
 
-                            <ul class="fact-counter">
-                                <li class="fact-counter__list">
-                                    <span class="fact-counter__list-value">30</span>
-                                    <span class="fact-counter__list-title">posts / minute</span>
-                                </li>
-
-                                <li class="fact-counter__list">
-                                    <span class="fact-counter__list-value">70K</span>
-                                    <span class="fact-counter__list-title">Total posts</span>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="working-process" id="working-process">
-        <div class="container">
-            <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Why Obsessed Club?</h2>
-                        <p>
-                            We've created a place for your obsession.
-                        </p>
+                        <h2>Never miss again a conversation</h2>
+                        <p>We gather all the information you need from the sources you should already be checking.</p>
                     </div>
                 </div>
-                <!-- section title end -->
-            </div>
-            <!-- section title row end -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="working-process-wrapper reveal">
-                        <ul class="working-process-list">
-                            <li class="working-process-list-item">
-                                    <span class="working-process__icon">
-                                        <i class="nc-icon nc-p-system-update"></i>
-                                    </span>
-                                <div>
-                                    <h5 class="working-process__title">Install the app</h5>
-                                    <p class="working-process__description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.
-                                    </p>
-                                </div>
-                            </li>
-                            <!-- single item end -->
-                            <li class="working-process-list-item">
-                                    <span class="working-process__icon">
-                                        <i class="nc-icon nc-touch-id"></i>
-                                    </span>
-                                <div>
-                                    <h5 class="working-process__title">Setup your profile</h5>
-                                    <p class="working-process__description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.
-                                    </p>
-                                </div>
-                            </li>
-                            <!-- single item end -->
-                            <li class="working-process-list-item">
-                                    <span class="working-process__icon">
-                                        <i class="nc-icon nc-p-heart"></i>
-                                    </span>
-                                <div>
-                                    <h5 class="working-process__title">Setup your profile</h5>
-                                    <p class="working-process__description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.
-                                    </p>
-                                </div>
-                            </li>
-                            <!-- single item end -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- content row end -->
-        </div>
-    </section>
-    <!-- =========== How it work End ============ -->
 
-    <!-- =========== Video content-1 Start ============ -->
-    <section class="video-content-one">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="video-content-wrapper">
-                        <img src="img/video-thumb-1.png" alt="media__content" class="media__content">
-                        <a href="img/demo.M4V" class="html5lightbox btn__play" data-width="650" data-height="366" title="">
-                            <i class="btn__play--icon nc-icon nc-triangle-right-17"></i>
-                        </a>
+                <!-- PRODUCT HUNT -->
+                <div class="col-4 col-md-2">
+                    <div class="feature">
+                            <span class="feature__icon">
+                                <img style="width: 70px;" src="https://www.shareicon.net/data/128x128/2016/07/10/119897_product-hunt_512x512.png" />
+                            </span>
+                        <h5 class="feature__title">Product Hunt</h5>
                     </div>
-                    <!-- media content end -->
                 </div>
+
+                <!-- INDIE HACKERS -->
+                <div class="col-4 col-md-2">
+                    <div class="feature">
+                            <span class="feature__icon">
+                                <img style="width: 70px;" src="https://storage.googleapis.com/indie-hackers.appspot.com/product-avatars/indie-hackers/ibTLPyjwVebnZjMGKvz6ztarnuV2" />
+                            </span>
+                        <h5 class="feature__title">Indie Hackers</h5>
+                    </div>
+                </div>
+
+                <!-- REDDIT -->
+                <div class="col-4 col-md-2">
+                    <div class="feature">
+                            <span class="feature__icon">
+                                <img style="width: 70px;" src="https://www.redditstatic.com/new-icon.png" />
+                            </span>
+                        <h5 class="feature__title">Reddit</h5>
+                    </div>
+                </div>
+
+                <!-- HN -->
+                <div class="col-4 col-md-2">
+                    <div class="feature">
+                            <span class="feature__icon">
+                                <img style="width: 70px;" src="http://jasonlbaptiste.com/wp-content/uploads/2009/05/ycombinator-logo.gif" />
+                            </span>
+                        <h5 class="feature__title">Hacker News</h5>
+                    </div>
+                </div>
+
+                <!-- TWITTER -->
+                <div class="col-4 col-md-2">
+                    <div class="feature">
+                            <span class="feature__icon">
+                                <img style="width: 70px;" src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c53e.png" />
+                            </span>
+                        <h5 class="feature__title">Twitter</h5>
+                    </div>
+                </div>
+
+                <!-- YOUTUBE -->
+                <div class="col-4 col-md-2">
+                    <div class="feature">
+                            <span class="feature__icon">
+                                <img style="width: 70px;" src="data:image/png;base64,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" />
+                            </span>
+                        <h5 class="feature__title">YouTube</h5>
+                    </div>
+                </div>
+
             </div>
-            <!-- row end -->
         </div>
     </section>
-    <!-- =========== Video content-1 End ============ -->
 
     <!-- =========== Testimonial-1 Start ============ -->
-    <section class="testimonial-one" id="testimonial">
+    <section class="testimonial-two" id="testimonial">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title light">
-                        <h2>Our users love this app?</h2>
-                        <p>Our users are impatient. They're probably distracted too. Keep it simple and beautiful, fun and functional. Clean aesthetics supported by a strong concept is what we stand for.
-                        </p>
+                        <h2>What do other obsessed say?</h2>
+                        <p>Our approach of consuming content is new and our users are in love with it!</p>
                     </div>
                 </div>
                 <!-- section title end -->
@@ -499,111 +326,6 @@
     </section>
     <!-- =========== Testimonial-1 End ============ -->
 
-    <!-- =========== FAQ-1 Start ============ -->
-    <section class="faq-one">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>Frequently Asked Questions</h2>
-                        <p>Our users are impatient. They're probably distracted too. Keep it simple and beautiful, fun and functional. Clean aesthetics supported by a strong concept is what we stand for.
-                        </p>
-                    </div>
-                </div>
-                <!-- section title end -->
-            </div>
-            <!-- section title row end -->
-            <div class="row">
-                <div class="col-10 mx-auto">
-                    <ul class="faq">
-                        <li class="faq-list">
-                            <h5 class="faq-list__title">Do I need to make a payment?</h5>
-                            <p class="faq-list-description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.
-                            </p>
-                        </li>
-                        <!-- single ite end -->
-                        <li class="faq-list">
-                            <h5 class="faq-list__title">Can I track my daily tasks?</h5>
-                            <p class="faq-list-description">While designing residential property, a great emphasis is placed on infrastructure: landscaping design, transport accessibility.</p>
-                        </li>
-                        <!-- single ite end -->
-                        <li class="faq-list">
-                            <h5 class="faq-list__title">Can I use my tasks in any device?</h5>
-                            <p class="faq-list-description">While designing residential property, a great emphasis is placed on infrastructure: landscaping design, transport accessibility, environmental friendliness and architectural solutions, that jointly form comfortable conditions.</p>
-                        </li>
-                        <!-- single ite end -->
-                        <li class="faq-list">
-                            <h5 class="faq-list__title">Will you provide regular updates?</h5>
-                            <p class="faq-list-description">Big, small, online, offline, local or international. Size doesn't matter. We work on diverse projects for top brands as well as for cool startups. Check out some of our favorites.
-                            </p>
-                        </li>
-                        <!-- single ite end -->
-                        <li class="faq-list">
-                            <h5 class="faq-list__title">Do I need to make a payment?</h5>
-                            <p class="faq-list-description">No one cares about products. People care about ideas. Is a product an idea? Noup. Is a brand? A good one is.</p>
-                        </li>
-                        <li class="faq-list">
-                            <h5 class="faq-list__title">Can I track my daily tasks?</h5>
-                            <p class="faq-list-description">Big, small, online, offline, local or international. Size doesn't matter. We work on diverse projects for top brands as well as for cool startups. Check out some of our favorites.
-                            </p>
-                        </li>
-                        <!-- single ite end -->
-                    </ul>
-                </div>
-            </div>
-            <!-- row end -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="faq-contact">
-                            <span class="faq-contact__content">Still have a question? Reach out to us:
-                                <a href="mailto:">info@vapp.com</a>
-                            </span>
-                    </div>
-                    <!-- faq contact end -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- =========== FAQ-1 End ============ -->
-
-    <!-- =========== newsletter-1 Start ============ -->
-    <section class="newsletter-one">
-        <img src="img/map.png" alt="media__content" class="media__content">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="newsletter-wrapper">
-                        <div class="newsletter-media reveal">
-                            <picture class="newsletter-media__img">
-                                <source srcset="img/book.png" media="(min-width: 768px)">
-                                <img src="img/book--smaller.png" alt="book">
-                            </picture>
-                        </div>
-                        <!-- media content end -->
-
-                        <div class="newsletter-optin reveal">
-                            <h2 class="newsletter-optin__title">You have other obsessions?</h2>
-                            <p class="newsletter-optin__description">A complete guide to manage daily routines.</p>
-
-                            <form class="form newsletter-optin__form" action="#">
-
-                                <div class="form__field form__field--group">
-                                    <input class="form-control" type="text" name="email" value="" placeholder="Enter your email address" required="">
-                                    <button type="submit" class="btn__submit">
-                                        <i class="btn__submit--icon nc-icon nc-send"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- content end -->
-                    </div>
-                </div>
-            </div>
-            <!-- row end -->
-        </div>
-    </section>
-    <!-- =========== newsletter-1 End ============ -->
-
     <!-- =========== cta-1 start ============ -->
     <section class="cta-one">
         <img src="img/shape-1.svg" alt="" class="media__content">
@@ -612,15 +334,12 @@
                 <div class="col-12 col-lg-11 offset-lg-1">
                     <div class="cta-wrapper reveal">
                         <div class="cta-content">
-                            <h2 class="cta__title">Try vApp for free!</h2>
+                            <h2 class="cta__title">Be part of the obsession</h2>
                             <p class="cta__description">Big, small, online, offline, local or international. Size doesn't matter. We work on diverse projects for top brands as well as for cool startups. Check out some of our favorites.</p>
                             <!-- title end -->
                             <div class="cta__buttons">
                                 <a href="#" class="db-btn db-btn__type-sm db-btn__outline">
-                                    <i class="db-btn__icon nc-icon nc-apple"></i> App store
-                                </a>
-                                <a href="#" class="db-btn db-btn__type-sm db-btn__outline">
-                                    <i class="db-btn__icon nc-icon nc-ic_android_48px"></i>Play store
+                                    Feed your obsession for $5/mo
                                 </a>
                             </div>
                         </div>

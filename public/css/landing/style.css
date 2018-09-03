@@ -5102,15 +5102,6 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 .hero .cta__buttons .db-btn.download { padding-left: 4.0625rem; padding-right: 1.75rem; }
 @media only screen and (min-width: 992px) { .hero .cta__buttons .db-btn.download { padding-left: 4.5rem; padding-right: 2.1875rem; } }
 
-/*-------------- Hero Text Light--------------*/
-.hero-text-light .hero__title { color: #ffffff; }
-.hero-text-light .hero__caption { color: #ffffff; }
-.hero-text-light .newsletter-optin .form-control { background-color: #ffffff; }
-.hero-text-light .newsletter-optin .btn__submit { color: #ffffff; }
-.hero-text-light .newsletter-optin .newsletter-features li { color: #ffffff; }
-.hero-text-light .watch-video__text { color: #d6e1ff; }
-.hero-text-light .watch-video__text--big { color: #ffffff; }
-
 /*-------------- Hero Text dark--------------*/
 .hero-text-dark .hero__title { color: #2d3136; }
 .hero-text-dark .hero__caption { color: #2d3136; }
@@ -5118,12 +5109,11 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 .hero-text-dark .watch-video__text--big { color: #2d3136; }
 
 /*========================= Hero-1 =========================*/
-.hero-one .overlay { background: linear-gradient(-46deg, #2313b8 0%, #53a0fd 50%, #09bf6b 100%); opacity: 0.7; }
 .hero-one .hero-content { position: relative; }
 @media only screen and (min-width: 992px) { .hero-one .hero-content { padding: 13.125rem 0 22.5rem; } }
 @media only screen and (max-width: 991px) { .hero-one .hero-content { margin: 0 auto; text-align: center; } }
 .hero-one .hero .hero-media { text-align: center; }
-@media only screen and (min-width: 992px) { .hero-one .hero .hero-media { position: absolute; bottom: 0; right: 0; z-index: -1; text-align: right; } }
+@media only screen and (min-width: 992px) { .hero-one .hero .hero-media { position: absolute; bottom: 0; right: -550px; z-index: -1; text-align: right; } }
 
 /*========================= Hero-2 =========================*/
 section[class^=hero-two] { overflow: visible; }
@@ -5825,3 +5815,16 @@ section[class^=hero-six] { overflow: visible; }
 
 /**! 31. color-primary **/
 /**! 32. theme-gradient **/
+/********************************************* custom
+/*********************************************/
+.mobile-container { width: 100%; }
+
+.mobile { margin: 0 auto; display: block; }
+
+.section-title h3 { margin-top: 40px; font-size: 1.8rem; }
+
+.testimonial-two { margin-top: 60px; }
+
+.feature__icon { height: 50px; }
+
+.features-one .feature { margin-bottom: 50px; }

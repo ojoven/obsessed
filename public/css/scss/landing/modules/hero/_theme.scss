@@ -1,35 +1,3 @@
-/*-------------- Hero Text Light--------------*/
-
-.hero-text-light {
-    .hero__title {
-        color: $color-white;
-    }
-    .hero__caption {
-        color: $color-white;
-    }
-    .newsletter-optin {
-        .form-control {
-            background-color: $color-white;
-        }
-        .btn__submit {
-            color: $color-white;
-        }
-        .newsletter-features {
-            li {
-                color: $color-white;
-            }
-        }
-    }
-    .watch-video {
-        &__text {
-            color: #d6e1ff;
-            &--big {
-                color: $color-white;
-            }
-        }
-    }
-}
-
 /*-------------- Hero Text dark--------------*/
 
 .hero-text-dark {

@@ -1,10 +1,6 @@
 /*========================= Hero-1 =========================*/
 
 .hero-one {
-    .overlay {
-        background: linear-gradient(-46deg, #2313b8 0%, #53a0fd 50%, #09bf6b 100%);
-        opacity: 0.7;
-    }
     .hero {
         &-content {
             position: relative;
@@ -21,7 +17,7 @@
             @include media(992) {
                 position: absolute;
                 bottom: 0;
-                right: 0;
+                right: -550px;
                 z-index: -1;
                 text-align: right;
             }

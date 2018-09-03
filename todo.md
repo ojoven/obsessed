@@ -3,6 +3,15 @@ TODO
 
 We'll first create a working example, for people whose obsession is to write a book / novel
 * Create obsession landing page
+	- Logo
+	- Navigation
+	- Navigation button
+	- Animations / Timeline
+	- and don't miss a conversation from...
+	- this is a club section
+	- Change section what people is saying
+	- Reinforcement - last section
+	- Footer
 * Create login / payment page
 * Add comments for HackerNews
 * Add posts / comments for Product Hunt
