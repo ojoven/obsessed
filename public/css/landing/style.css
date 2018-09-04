@@ -5560,7 +5560,7 @@ section[class^=hero-six] { overflow: visible; }
 /*********************************************/
 /**! 23. general **/
 /*========================= section title =========================*/
-.section-title { max-width: 695px; margin: 0 auto 3.75rem; text-align: center; }
+.section-title { max-width: 90%; margin: 0 auto 3.75rem; text-align: center; }
 @media only screen and (min-width: 768px) { .section-title { margin-bottom: 4.375rem; } }
 .section-title h2 { margin-bottom: 1.5625rem; }
 .section-title.light p { color: #f6f7f8; }

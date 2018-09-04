@@ -90,7 +90,7 @@
                         <!-- IMAGE -->
                         <div class="hero-media">
                             <picture class="hero-media__img">
-                                <img src="img/obsessed_side.png" alt="hero-mobile">
+                                <img src="https://www.kostenvoranschlag-handy.de/images/img/price/samsung_s5.png" alt="hero-mobile">
                             </picture>
                         </div>
 
@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="mobile-container">
-                    <img class="mobile" src="https://static.vecteezy.com/system/resources/previews/000/081/526/non_2x/vector-iphone-6-white.jpg" />
+                    <img class="mobile" src="https://www.kostenvoranschlag-handy.de/images/img/price/samsung_s5.png" />
                 </div>
 
             </div>
@@ -319,12 +319,12 @@
                 <div class="col-12 col-lg-11 offset-lg-1">
                     <div class="cta-wrapper reveal">
                         <div class="cta-content">
-                            <h2 class="cta__title">Be part of the obsession</h2>
-                            <p class="cta__description">Big, small, online, offline, local or international. Size doesn't matter. We work on diverse projects for top brands as well as for cool startups. Check out some of our favorites.</p>
+                            <h2 class="cta__title">Feed<br>your obsession</h2>
+                            <p class="cta__description">While you're thinking about the possibility of hiring this service you're already missing lots of interesting and game changing conversations out there.</p>
                             <!-- title end -->
                             <div class="cta__buttons">
                                 <a href="#" class="db-btn db-btn__type-sm db-btn__outline">
-                                    Feed your obsession for $5/mo
+                                    OK, I'll do it!
                                 </a>
                             </div>
                         </div>
