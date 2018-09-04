@@ -111,8 +111,10 @@
 
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>The only, the unique, the timeline!</h2>
-                        <p>Oh, where should I go to get the latest info or to get the best conversations around side projecting? Don't think about it anymore. Every content piece that is posted on the Internet related to side projects will show up <b>in real time</b> in your timeline.</p>
+                        <!--<h2>The only, the unique, the timeline!</h2>-->
+                        <h2>The first and unique real time feed</h2>
+                        <p>Created for you, that are obsessed with side projects and product development.</p>
+                        <p>Every content piece that is posted on the Internet related to side projects will show up <b>in real time</b> in your timeline.</p>
                     </div>
                 </div>
 
@@ -125,6 +127,7 @@
         </div>
     </section>
 
+    <!-- SOURCES -->
     <section class="features-one reveal">
 
         <div class="container">
@@ -134,7 +137,8 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2>Never miss again a conversation</h2>
-                        <p>We gather all the information you need from the sources you should already be checking.</p>
+                        <p>Our bots gather all the information you need from the sources you should already be checking.</p>
+                        <p>In a single place.</p>
                     </div>
                 </div>
 
@@ -202,6 +206,27 @@
         </div>
     </section>
 
+    <!-- SERVICES -->
+    <section class="features-one reveal">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Exclusive service, just 50 vacancies</h2>
+                        <p>We're planning this as an exclusive club for people whose obsession is to create side projects. Take your seat and don't miss the opportunity.</p>
+                    </div>
+                </div>
+
+                <div class="mobile-container">
+                    <img class="mobile" src="img/club.png" style="max-width: 80%; margin: 0 auto; width: 600px; " />
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
     <!-- =========== Testimonial-1 Start ============ -->
     <section class="testimonial-two" id="testimonial">
         <div class="container">
@@ -221,7 +246,7 @@
                         <div class="testimonial-item">
                             <div class="testimonial-content">
                                     <span class="testimonial__avatar">
-                                        <img src="img/testimonial-1.png" alt="">
+                                        <img src="https://pbs.twimg.com/profile_images/910757095066218496/DKlBv7g8_bigger.jpg" alt="">
                                     </span>
                                 <div>
                                     <blockquote class="testimonial__quote">You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change and click save. Thanks, guys!
@@ -241,7 +266,7 @@
                         <div class="testimonial-item">
                             <div class="testimonial-content">
                                     <span class="testimonial__avatar">
-                                        <img src="img/testimonial-2.png" alt="">
+                                        <img src="https://pbs.twimg.com/profile_images/562655925190668288/s1BO8XKe_bigger.jpeg" alt="">
                                     </span>
                                 <div>
                                     <blockquote class="testimonial__quote">You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change and click save. Thanks, guys!
@@ -261,47 +286,7 @@
                         <div class="testimonial-item">
                             <div class="testimonial-content">
                                     <span class="testimonial__avatar">
-                                        <img src="img/testimonial-3.png" alt="">
-                                    </span>
-                                <div>
-                                    <blockquote class="testimonial__quote">You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change and click save. Thanks, guys!
-                                    </blockquote>
-                                        <span class="testimonial__customer-rating">
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                        </span>
-                                    <h5 class="testimonial__customer-name">Roy Jimenez</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single item end -->
-                        <div class="testimonial-item">
-                            <div class="testimonial-content">
-                                    <span class="testimonial__avatar">
-                                        <img src="img/testimonial-4.png" alt="">
-                                    </span>
-                                <div>
-                                    <blockquote class="testimonial__quote">You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change and click save. Thanks, guys!
-                                    </blockquote>
-                                        <span class="testimonial__customer-rating">
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                            <i class="nc-icon nc-favourite-31"></i>
-                                        </span>
-                                    <h5 class="testimonial__customer-name">Roy Jimenez</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single item end -->
-                        <div class="testimonial-item">
-                            <div class="testimonial-content">
-                                    <span class="testimonial__avatar">
-                                        <img src="img/testimonial-5.png" alt="">
+                                        <img src="https://pbs.twimg.com/profile_images/1012694977044873218/8u0Y_Nya_bigger.jpg" alt="">
                                     </span>
                                 <div>
                                     <blockquote class="testimonial__quote">You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change and click save. Thanks, guys!
