@@ -343,9 +343,7 @@
             <!-- row end -->
         </div>
     </section>
-    <!-- =========== cta-1 End ============ -->
 
-    <!-- =========== footer-1 End ============ -->
     <footer class="footer-one">
         <div class="container">
             <div class="row">
@@ -353,32 +351,26 @@
                     <div class="footer">
                         <div class="brand-logo">
                             <a href="#">
-                                <img src="img/brand-logo-color.png" alt="brand logo">
+                                <img src="img/logo.png" alt="Obsessed Club logo">
                             </a>
                         </div>
-                        <p class="footer__caption">Sitting proudly atop M3565 is the two-storey penthouse. The master bedroom suite is phenomenally spacious and opens out to a breathtaking plunge pool.
+                        <p class="footer__caption">A new way of curating and consuming content from the Internet.<br>Made for the exigents.
                         </p>
                         <nav class="footer-widget">
                             <ul>
-                                <li>
-                                    <a href="#">Affiliate program</a>
-                                </li>
                                 <li>
                                     <a href="#">Terms & Conditions</a>
                                 </li>
                                 <li>
                                     <a href="#">Privacy Policy</a>
                                 </li>
-                                <li>
-                                    <a href="#">Refund Policy</a>
-                                </li>
                             </ul>
                         </nav>
                         <!-- widget end -->
                         <div class="footer-copyright">
-                                <span class="footer-copyright__text">© 2018 vApp, Design with
-                                    <i class="fa fa-heart"></i> by
-                                    <a href="#">Team Dhrubok</a>
+                                <span class="footer-copyright__text">© <?php echo date('Y'); ?> Obsessed Club, Made with
+                                    &nbsp;<i class="fa fa-heart"></i>&nbsp; from
+                                    <a href="#">The Basque Country</a>
                                 </span>
                         </div>
                         <!-- copyright content end -->
