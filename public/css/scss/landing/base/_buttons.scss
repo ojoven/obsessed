@@ -42,7 +42,7 @@
         font-weight: 500;
         &.nav-cta-btn {
             padding: 0 rem(15);
-            color: $color-white;
+            color: $color-black;
             font-size: rem(18);
             font-weight: 400;
             min-width: rem(150);
@@ -113,4 +113,13 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
         background-color: $color-white;
     }
+}
+
+
+.sticky-nav {
+
+    .db-btn__outline.nav-cta-btn {
+        color: $color-white;
+    }
+
 }

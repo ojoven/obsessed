@@ -31,7 +31,7 @@
                     <div class="navigation-content">
                         <a href="#" class="navigation__brand">
                             <img class="navigation-main__logo" src="img/logo.png" alt="">
-                            <img class="sticky-nav__logo" src="img/logo.png" alt="sticky logo">
+                            <img class="sticky-nav__logo" src="img/logo-white.png" alt="sticky logo">
                         </a>
                         <button class="navigation__toggler"></button>
 
@@ -47,7 +47,7 @@
                                     <a class="navigation-menu__link" href="#feature">Features</a>
                                 </li>
                                 <li class="navigation-menu__item">
-                                    <a class="navigation-menu__link" href="#working-process">How It Works</a>
+                                    <a class="navigation-menu__link" href="#club">Club</a>
                                 </li>
                                 <li class="navigation-menu__item">
                                     <a class="navigation-menu__link" href="#testimonial">Reviews</a>
@@ -105,7 +105,7 @@
     </section>
 
     <!-- SERVICES -->
-    <section class="features-one reveal">
+    <section class="features-one reveal" id="feature">
         <div class="container">
             <div class="row">
 
@@ -207,7 +207,7 @@
     </section>
 
     <!-- SERVICES -->
-    <section class="features-one reveal">
+    <section class="features-one reveal" id="club">
         <div class="container">
             <div class="row">
 
