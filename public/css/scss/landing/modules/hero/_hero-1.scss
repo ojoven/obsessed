@@ -14,12 +14,14 @@
         }
         .hero-media {
             text-align: center;
+            max-width: 100%;
             @include media(992) {
                 position: absolute;
-                bottom: 0;
-                right: -550px;
+                bottom: 85px;
+                right: -93px;
                 z-index: -1;
                 text-align: right;
+                width: 590px;
             }
         }
     }
