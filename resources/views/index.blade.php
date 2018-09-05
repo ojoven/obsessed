@@ -111,7 +111,7 @@
 
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Everything that obsesses you in a single place.</h2>
+                        <h2>Your whole obsession in a single place.</h2>
                         <p>Every content piece that is posted on the Internet related to side projects will show up in real time in your timeline.</p>
                         <p>Created for you and your passion on side projects and product development.</p>
                     </div>
