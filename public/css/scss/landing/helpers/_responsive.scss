@@ -1,0 +1,16 @@
+
+.just-mobile {
+	display: none;
+
+	@include mediaMax(768) {
+		display: block;
+	}
+}
+
+.hide-mobile {
+	display: block;
+
+	@include mediaMax(768) {
+		display: none;
+	}
+}

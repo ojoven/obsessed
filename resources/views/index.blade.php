@@ -30,8 +30,8 @@
                 <div class="col-12">
                     <div class="navigation-content">
                         <a href="#" class="navigation__brand">
-                            <img class="navigation-main__logo" src="img/logo2.png" alt="">
-                            <img class="sticky-nav__logo" src="img/logo-white.png" alt="sticky logo">
+                            <img class="navigation-main__logo" src="/img/logo2.png" alt="">
+                            <img class="sticky-nav__logo" src="/img/logo-white.png" alt="sticky logo">
                         </a>
                         <button class="navigation__toggler"></button>
 
@@ -57,7 +57,10 @@
                         </nav>
 
                         <div class="navigation-button">
-                            <a href="#" class="db-btn db-btn__outline nav-cta-btn">Feed your obsession for $5/mo</a>
+                            <a href="#" class="db-btn db-btn__outline nav-cta-btn">
+                                <span class="hide-mobile">Feed your obsession for $5/mo</span>
+                                <span class="just-mobile">Join for $5/mo</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -212,7 +215,7 @@
 
             <div class="row">
 
-                <div class="message-total">*We retrieve content from a total of 120 different sources</div>
+                <div class="message-total">...and other 120 different sources.</div>
 
             </div>
 
@@ -220,19 +223,19 @@
     </section>
 
     <!-- SERVICES -->
-    <section class="features-one reveal" id="club">
+    <section class="features-one reveal section-club" id="club">
         <div class="container">
             <div class="row">
 
                 <div class="col-12">
                     <div class="section-title">
                         <h2>Take a seat, you're not alone</h2>
-                        <p>To offer as an exclusive club for people whose obsession is to create side projects.<br>Take your seat and don't miss the opportunity.</p>
+                        <p>It's not like you'll be part of a super exclusive community, but we're offering limited places.<br>Take your seat and don't miss the opportunity.</p>
                     </div>
                 </div>
 
                 <div class="image-container">
-                    <img class="image" src="img/throne.jpg" style="max-width: 80%; margin: 0 auto; width: 250px; " />
+                    <img class="image throne" src="/img/throne.jpg" />
                 </div>
 
             </div>
@@ -326,7 +329,7 @@
 
     <!-- CTA -->
     <section class="cta-one">
-        <img src="img/shape-1.svg" alt="" class="media__content">
+        <img src="/img/shape-1.svg" alt="" class="media__content">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-11 offset-lg-1">
@@ -346,7 +349,7 @@
                             <picture class="cta-media__img">
                                 <source srcset="img/cta-img-1.png" media="(min-width: 1200px)">
                                 <source srcset="img/cta-img--mid-1.png" media="(min-width: 992px)">
-                                <img src="img/cta-img--smaller-1.png" alt="cta-mobile" />
+                                <img src="/img/cta-img--smaller-1.png" alt="cta-mobile" />
                             </picture>
                         </div>
                         <!-- media content end -->
@@ -367,7 +370,7 @@
                         <!-- LOGO -->
                         <div class="brand-logo">
                             <a href="#">
-                                <img src="img/logo2.png" alt="Obsessed Club logo">
+                                <img src="/img/logo2.png" alt="Obsessed Club logo">
                             </a>
                         </div>
                         <p class="footer__caption">A new way of curating and consuming content from the Internet.<br>Made for the exigent.</p>
