@@ -8,11 +8,13 @@
     visibility: hidden;
     transition: .3s;
     display: none;
+
     &-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
+
     &__transparent {
         position: fixed;
         width: 100%;
@@ -22,20 +24,24 @@
         z-index: 9999;
         transition: .3s;
     }
+
     &__brand {
         line-height: rem(90);
         padding: 0 rem(15) 0 0;
         transition: .3s;
     }
+
     &-wrapper {
         display: flex;
     }
+
     &-menu__item {
         list-style: none;
         margin: 0;
         padding: 0;
         position: relative;
     }
+
     &-menu__link {
         color: #efecec;
         transition: .3s;
@@ -43,14 +49,16 @@
         font-weight: 600;
         font-size: rem(18)
     }
+
     &-button {
         line-height: rem(90);
         transition: .3s;
-        @include mediaMax(991){
-            margin: 0 rem(15) rem(0) rem(0);
 
+        @include mediaMax(991) {
+            margin: 0 rem(15) rem(0) rem(0);
         }
     }
+
     .nav-cta-btn {
         &.db-btn__outline {
             &:hover {
@@ -61,28 +69,35 @@
             }
         }
     }
+
     .offcanvas__close {
         display: none;
     }
+
     &__toggler {
         display: none;
     }
+
     .sticky-nav__logo {
         display: none;
     }
+
     /*
     sticky nav
     ============================*/
     &.sticky-nav {
         background: $color-primary;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
         .navigation-main__logo {
             display: none;
         }
+
         .sticky-nav__logo {
             display: block;
             width: 235px;
         }
+
         .nav-cta-btn {
             &:before {
                 background: $color-white;
@@ -99,32 +114,41 @@
                     box-shadow: 0 0 0 1px #e2e6ea;
                 }
             }
-        } 
+        }
+
         &.navigation__landscape {
             height: 70px;
+
             .navigation__brand {
                 line-height: 70px;
             }
+
             .navigation-menu {
+
                 >li>.navigation-menu__link {
                     padding: rem(21.5) rem(20);
                     color: #efecec;
                 }
             }
+
             .navigation-button {
                 line-height: 70px;
             }
         }
+
         &.navigation__portrait {
             height: 60px;
+
             .navigation__brand {
                 line-height: 60px;
             }
+
             .navigation-button {
                 line-height: 60px;
             }
         }
     }
+
     /*
     nav additional style 
     ============================*/

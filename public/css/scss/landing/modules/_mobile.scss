@@ -1,0 +1,25 @@
+/*========================= timeline =========================*/
+
+// MOBILE IMAGE
+.mobile-container {
+	position: relative;
+}
+
+.mobile {
+	width: 600px;
+	max-width: 90%;
+}
+
+// TIMELINE
+.timeline {
+	background: $color-white;
+	position: absolute;
+	top: 76px;
+	left: 363px;
+	width: 233px;
+	height: 415px;
+
+	@include mediaMax(768) {
+		display: none;
+	}
+}

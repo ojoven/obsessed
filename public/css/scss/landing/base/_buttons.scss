@@ -68,12 +68,6 @@
         height: rem(58);
         line-height: rem(58);
     }
-    &__icon {
-        padding-right: rem(15);
-        font-size: rem(25);
-        position: relative;
-        top: rem(3);
-    }
     &__primary {
         color: $color-white;
         background-color: $color-primary;
@@ -82,44 +76,13 @@
             color: $color-white;
         }
     }
-    &__blue {
-        color: $color-white;
-        background-color: $color-blue;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-        &:hover {
-            color: $color-white;
-        }
-    }
-    &__lemon {
-        color: $color-black;
-        background-image: linear-gradient(180deg, #ecef3c 0%, #d5db1c 100%);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-    }
-    &__yellow {
-        color: $color-black;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.18);
-        background-color: $color-yellow;
-    }
-    &__green {
-        color: $color-white;
-        background-color: $color-green;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-        &:hover {
-            color: $color-white;
-        }
-    }
-    &__white {
-        color: $color-black;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-        background-color: $color-white;
-    }
 }
 
 
 .sticky-nav {
 
     .db-btn__outline.nav-cta-btn {
-        color: $color-white;
+        //color: $color-white;
     }
 
 }

@@ -240,8 +240,8 @@
         </div>
     </section>
 
-    <!-- =========== Testimonial-1 Start ============ -->
-    <section class="testimonial-two" id="testimonial">
+    <!-- TESTIMONIAL -->
+    <section class="testimonial-container" id="testimonial">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -250,9 +250,9 @@
                         <p>Our approach of consuming content is new and our users are in love with it!</p>
                     </div>
                 </div>
-                <!-- section title end -->
+
             </div>
-            <!-- section title row end -->
+
             <div class="row">
                 <div class="col-12 col-lg-7 mx-auto">
                     <div class="testimonial reveal">
@@ -324,7 +324,7 @@
     </section>
     <!-- =========== Testimonial-1 End ============ -->
 
-    <!-- =========== cta-1 start ============ -->
+    <!-- CTA -->
     <section class="cta-one">
         <img src="img/shape-1.svg" alt="" class="media__content">
         <div class="container">
@@ -357,18 +357,22 @@
         </div>
     </section>
 
-    <footer class="footer-one">
+    <!-- FOOTER -->
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="footer">
+
+                        <!-- LOGO -->
                         <div class="brand-logo">
                             <a href="#">
                                 <img src="img/logo2.png" alt="Obsessed Club logo">
                             </a>
                         </div>
-                        <p class="footer__caption">A new way of curating and consuming content from the Internet.<br>Made for the exigent.
-                        </p>
+                        <p class="footer__caption">A new way of curating and consuming content from the Internet.<br>Made for the exigent.</p>
+
+                        <!-- LINKS -->
                         <nav class="footer-widget">
                             <ul>
                                 <li>
@@ -379,21 +383,22 @@
                                 </li>
                             </ul>
                         </nav>
-                        <!-- widget end -->
+
+                        <!-- COPYRIGHT -->
                         <div class="footer-copyright">
                                 <span class="footer-copyright__text">© <?php echo date('Y'); ?> Obsessed Club, Made with
                                     &nbsp;<i class="fa fa-heart"></i>&nbsp; from
                                     <a href="#">The Basque Country</a>
                                 </span>
                         </div>
-                        <!-- copyright content end -->
+
                     </div>
                 </div>
             </div>
-            <!-- row end -->
+
         </div>
     </footer>
-    <!-- =========== footer-1 End ============ -->
+
 </div>
 <!-- Main JS Files -->
 <script src="/js/app.min.js"></script>

@@ -27,28 +27,8 @@
         $(this).hide();
     });
 
-    // testimonial-1
-    $('.testimonial-one .testimonial').slick({
-        vertical: true,
-        verticalSwiping: true,
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        prevArrow: '<div><button class="prevArrow arrowBtn"><i class="nc-icon nc-tail-left"></i></button></div>',
-        nextArrow: '<div><button class="nextArrow arrowBtn"><i class="nc-icon nc-tail-right"></i></button></div>',
-
-        responsive: [{
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                vertical: false,
-                verticalSwiping: false,
-
-            }
-        }]
-    });
     // testimonial-2
-    $('.testimonial-two .testimonial').slick({
+    $('.testimonial-container .testimonial').slick({
         autoplay: false,
         prevArrow: '<div><button class="prevArrow arrowBtn"><i class="nc-icon nc-tail-left"></i></button></div>',
         nextArrow: '<div><button class="nextArrow arrowBtn"><i class="nc-icon nc-tail-right"></i></button></div>',
