@@ -4762,7 +4762,7 @@ a.text-dark:hover, a.text-dark:focus { color: #1d2124 !important; }
 /********************************************* base
 /*********************************************/
 /*========================= base css =========================*/
-body { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-family: "SF Pro Display", Helvetica, Arial, sans-serif; color: #2d3136; margin: 0; overflow-x: hidden; }
+body { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-family: "Fira Sans", Helvetica, Arial, sans-serif; color: #2d3136; margin: 0; overflow-x: hidden; }
 
 @media only screen and (max-width: 767px) { html { font-size: 87.5%; } }
 
@@ -4815,11 +4815,11 @@ h6 { font-size: 1.3125rem; line-height: 1.28; }
 p { font-size: 1.0625rem; line-height: 1.53; color: #818992; }
 
 /*------- buttons -------*/
-.db-btn { padding: 0 1.875rem; border-radius: 5px; font-family: "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 1.25rem; font-weight: 500; text-align: center; position: relative; transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1); z-index: 1; }
+.db-btn { padding: 0 1.875rem; border-radius: 5px; font-family: "Fira Sans", Helvetica, Arial, sans-serif; font-size: 1.25rem; font-weight: 500; text-align: center; position: relative; transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1); z-index: 1; }
 .db-btn:hover { color: #2d3136; }
 .db-btn:hover:before { left: 0%; right: auto; width: 100%; }
 .db-btn:before { display: block; position: absolute; top: 0px; right: 0px; height: 100%; width: 0px; z-index: -1; border-radius: 5px; content: ''; background: rgba(0, 0, 0, 0.05); transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1); }
-.db-btn__outline { min-width: 8.125rem; height: 3.75rem; line-height: 3.75rem; box-shadow: 0 0 0 1px #e2e6ea; color: #2d3136; font-family: "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 1.25rem; font-weight: 500; }
+.db-btn__outline { min-width: 8.125rem; height: 3.75rem; line-height: 3.75rem; box-shadow: 0 0 0 1px #e2e6ea; color: #2d3136; font-family: "Fira Sans", Helvetica, Arial, sans-serif; font-size: 1.25rem; font-weight: 500; }
 .db-btn__outline.nav-cta-btn { padding: 0 0.9375rem; color: #2d3136; font-size: 1.125rem; font-weight: 400; min-width: 9.375rem; height: 2.625rem; line-height: 2.625rem; }
 .db-btn__outline:hover { color: #ffffff; border-color: transparent; }
 .db-btn__outline:before { background: #DCB501; border-radius: 5px; }
@@ -4969,7 +4969,7 @@ footer .footer__caption { margin-bottom: 2.1875rem; font-size: 1rem; font-weight
 footer .footer-widget { margin-bottom: 0.9375rem; }
 footer .footer-widget ul { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
 footer .footer-widget li { margin: 0 0.9375rem; }
-footer .footer-widget li a { color: #2d3136; font-family: "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 1rem; font-weight: 400; line-height: 1.5rem; transition: .3s; }
+footer .footer-widget li a { color: #2d3136; font-family: "Fira Sans", Helvetica, Arial, sans-serif; font-size: 1rem; font-weight: 400; line-height: 1.5rem; transition: .3s; }
 footer .footer-widget li a:hover { color: #DCB501; }
 footer .footer-copyright { text-align: center; }
 footer .footer-copyright__text, footer .footer-copyright a { color: #818992; font-size: 1rem; line-height: 1.5rem; font-weight: 400; }
@@ -4991,7 +4991,7 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 @media only screen and (max-width: 767px) { .hero-wrapper { text-align: center; } }
 .hero__title { font-size: 2.8125rem; line-height: 1.2; font-weight: 300; margin-bottom: 1.25rem; }
 @media only screen and (min-width: 992px) { .hero__title { font-size: 4.375rem; line-height: 1.05; } }
-.hero__caption { font-size: 1.3125rem; font-weight: 400; line-height: 1.875rem; margin-bottom: 1.875rem; }
+.hero__caption { font-size: 1.3125rem; font-weight: 300; line-height: 1.875rem; margin-bottom: 1.875rem; }
 .hero__wave { position: absolute; bottom: 0; width: 100%; }
 .hero__wave--svg .st0 { fill: #fff; opacity: 1; }
 
@@ -5065,7 +5065,7 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 @media only screen and (max-width: 767px) { .features-one .feature { max-width: 19.375rem; margin: 0 auto; margin-bottom: 2.5rem; } }
 .features-one .feature__icon { height: 50px; margin-bottom: 1.875rem; }
 .features-one .feature__icon img { width: 70px; }
-.features-one .feature__title { margin-bottom: 1.0625rem; margin-top: 0.3125rem; font-size: 1.1875rem; }
+.features-one .feature__title { margin-bottom: 1.0625rem; margin-top: 0.3125rem; font-size: 1rem; font-weight: 300; color: #2a2f36; }
 
 /*========================= testimonial default style  =========================*/
 .testimonial-content { display: flex; margin-bottom: 3.25rem; align-items: center; }
@@ -5074,7 +5074,7 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 .testimonial__avatar { width: 44px; height: 44px; border-radius: 100px; flex: 0 0 44px; margin-bottom: 1.25rem; }
 .testimonial__avatar img { border-radius: 100px; }
 @media only screen and (min-width: 768px) { .testimonial__avatar { margin-right: 1.25rem; margin-bottom: 0; } }
-.testimonial__quote { margin: 0; color: #ffffff; font-family: "SF Pro Display", Helvetica, Arial, sans-serif; font-size: 1.125rem; font-weight: 400; line-height: 28px; font-style: italic; margin-bottom: 1.5625rem; font-weight: 500; }
+.testimonial__quote { margin: 0; color: #ffffff; font-family: "Fira Sans", Helvetica, Arial, sans-serif; font-size: 1.125rem; font-weight: 400; line-height: 28px; font-style: italic; margin-bottom: 1.5625rem; font-weight: 500; }
 @media only screen and (min-width: 768px) { .testimonial__quote { font-size: 1.3125rem; line-height: 30px; } }
 .testimonial__customer-rating { color: #f8e71c; font-size: 0.9375rem; margin-bottom: 0.9375rem; }
 .testimonial__customer-name { color: #ffffff; font-size: 1.3125rem; font-weight: 700; }
@@ -5119,8 +5119,14 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 
 .mobile { width: 600px; max-width: 90%; }
 
-.timeline { background: #ffffff; position: absolute; top: 76px; left: 363px; width: 233px; height: 415px; }
+.timeline { background: #ffffff; position: absolute; top: 76px; left: 363px; width: 233px; height: 415px; padding: 10px; box-sizing: border-box; overflow: hidden; }
 @media only screen and (max-width: 768px) { .timeline { display: none; } }
+.timeline .post { height: 90px; background: #eee; margin: 0 0 10px; transition: all .5s ease-in-out; }
+.timeline .post.active { background: #fedd45; }
+.timeline .post.loading { height: 0; }
+
+.messages-external-container { position: absolute; top: 0; right: 10%; font-weight: 300; }
+.messages-external-container .message { font-size: 1.375rem; width: 300px; max-width: 80%; }
 
 /*========================= club =========================*/
 .section-club .throne { max-width: 80%; margin: 0 auto; width: 250px; }

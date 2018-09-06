@@ -18,8 +18,42 @@
 	left: 363px;
 	width: 233px;
 	height: 415px;
+	padding: 10px;
+	box-sizing: border-box;
+	overflow: hidden;
 
 	@include mediaMax(768) {
 		display: none;
 	}
+
+	.post {
+		height: 90px;
+		background: #eee;
+		margin: 0 0 10px;
+		transition: all .5s ease-in-out;
+
+		&.active {
+			background: lighten($color-primary, 20%);
+		}
+
+		&.loading {
+			height: 0;
+		}
+	}
+}
+
+// EXTERNAL MESSAGES ANIMATION
+.messages-external-container {
+
+	position: absolute;
+	top: 0;
+	right: 10%;
+	font-weight: 300;
+
+	.message {
+		font-size: rem(22);
+		width: 300px;
+		max-width: 80%;
+	}
+
 }

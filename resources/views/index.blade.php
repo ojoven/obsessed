@@ -13,7 +13,7 @@
     <!-- Favicon CSS -->
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <!-- Fonts CSS -->
-    <link href="/fonts/SFProDisplay.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700" rel="stylesheet">
     <!-- Style CSS -->
     <link rel="stylesheet" href="/css/landing/style.css">
 
@@ -114,9 +114,9 @@
 
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Your whole obsession in a single place.</h2>
+                        <h2>Your whole obsession.<br>In a single place.<br>In real time.</h2>
                         <p>Every content piece that is posted on the Internet related to side projects will show up in real time in your timeline.</p>
-                        <p>Created for you and your passion on side projects and product development.</p>
+                        <p>Created for you and your passion on side projects and product development...</p>
                     </div>
                 </div>
 
@@ -125,11 +125,16 @@
 
                     <div class="timeline">
 
-                    </div>
-                </div>
+                        <div class="post active"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
 
-                <div class="feed-external-animation">
-                    <div class="message"></div>
+                    </div>
+
+                    <div class="messages-external-container"></div>
                 </div>
 
             </div>
@@ -146,7 +151,7 @@
 
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Never miss again a conversation</h2>
+                        <h2>...and never miss again a conversation</h2>
                         <p>Our bots gather in real time all the information you need from the sources you should already be checking.</p>
                     </div>
                 </div>
