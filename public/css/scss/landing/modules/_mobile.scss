@@ -3,6 +3,10 @@
 // MOBILE IMAGE
 .mobile-container {
 	position: relative;
+	@include media(1200) {
+		position: relative;
+		left: 92px;
+	}
 }
 
 .mobile {
@@ -50,6 +54,7 @@
 
 		&.loading {
 			height: 0;
+			margin-bottom: 0;
 		}
 
 		@include mediaMax(767) {
@@ -95,6 +100,30 @@
 				position: absolute;
 				top: -113px;
 				left: -34px;
+			}
+		}
+
+		&.position-3 {
+			top: 50px;
+			left: 100px;
+
+			.arrow {
+				margin-top: 20px;
+				position: absolute;
+				left: 133px;
+			}
+		}
+
+		&.position-4 {
+			top: 242px;
+			left: 73px;
+
+			.arrow {
+				transform: scaleY(-1) rotate(19deg);
+				margin-top: 20px;
+				left: 154px;
+				position: absolute;
+				top: -133px;
 			}
 		}
 	}

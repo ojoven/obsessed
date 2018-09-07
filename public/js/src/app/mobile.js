@@ -7,6 +7,9 @@ var messages = [
 	'@levelsio just posted a tweet on one of his projects',
 ];
 
+var previousMessagePosition = 3,
+	previousMessageIndex = 0;
+
 // LOGIC
 $(function() {
 
@@ -26,9 +29,20 @@ function handleMessagesTimelineAnimation() {
 
 }
 
+function getRandomNumberBetweenDontDuplicatePrevious(a, b, previous) {
+
+	var randomNumber = previous;
+	while (randomNumber === previous) {
+		randomNumber = getRandomNumberBetween(a, b);
+	}
+
+	return randomNumber;
+}
+
 function getRandomNumberBetween(a, b) {
 
-	return Math.floor(Math.random() * b) + a;
+	var randomNumber = Math.floor(Math.random() * b) + a;
+	return randomNumber;
 }
 
 $.fn.removeClassRegex = function(regex) {
@@ -45,12 +59,16 @@ function renderExternalMessage() {
 	var $messageContainer = $('.message-container');
 
 	var $messageWrapper = '<div class="message">' + message + '</div>';
-
-	var position = getRandomNumberBetween(1, 2);
-	$messageContainer.removeClassRegex(/^position-/);
-	$messageContainer.addClass('transition').addClass('position-' + position);
+	$messageContainer.addClass('transition');
 
 	setTimeout(function() {
+
+		var position = $(window).width() < 768 ? getRandomNumberBetweenDontDuplicatePrevious(1, 2, previousMessagePosition) : getRandomNumberBetweenDontDuplicatePrevious(1, 4, previousMessagePosition);
+		previousMessagePosition = position;
+
+		$messageContainer.removeClassRegex(/^position-/);
+		$messageContainer.addClass('position-' + position);
+
 		$messageContainer.find('.message').remove();
 		$messageContainer.prepend($messageWrapper);
 		$messageContainer.removeClass('transition');

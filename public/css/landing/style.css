@@ -5116,6 +5116,7 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 
 /*========================= timeline =========================*/
 .mobile-container { position: relative; }
+@media only screen and (min-width: 1200px) { .mobile-container { position: relative; left: 92px; } }
 
 .mobile { width: 600px; max-width: 90%; }
 
@@ -5126,7 +5127,7 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 @media only screen and (max-width: 575px) { .timeline { left: 19vw; top: 12vw; width: 35vw; height: 60vw; } }
 .timeline .post { height: 90px; background: #eee; margin: 0 0 10px; transition: all .5s ease-in-out; }
 .timeline .post.active { background: #fedd45; }
-.timeline .post.loading { height: 0; }
+.timeline .post.loading { height: 0; margin-bottom: 0; }
 @media only screen and (max-width: 767px) { .timeline .post { height: 60px; } }
 
 .messages-external-container { position: absolute; top: 0; right: 10%; font-weight: 300; width: 100%; }
@@ -5136,6 +5137,10 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 .messages-external-container .message-container.position-1 .arrow { transform: scaleX(-1); margin-top: 20px; }
 .messages-external-container .message-container.position-2 { top: 261px; right: -46px; }
 .messages-external-container .message-container.position-2 .arrow { transform: scaleX(-1) scaleY(-1) rotate(29deg); position: absolute; top: -113px; left: -34px; }
+.messages-external-container .message-container.position-3 { top: 50px; left: 100px; }
+.messages-external-container .message-container.position-3 .arrow { margin-top: 20px; position: absolute; left: 133px; }
+.messages-external-container .message-container.position-4 { top: 242px; left: 73px; }
+.messages-external-container .message-container.position-4 .arrow { transform: scaleY(-1) rotate(19deg); margin-top: 20px; left: 154px; position: absolute; top: -133px; }
 .messages-external-container .message { font-size: 1.375rem; width: 100%; }
 .messages-external-container .arrow { width: 146px; }
 @media only screen and (max-width: 768px) { .messages-external-container { right: 10px; text-align: right; }

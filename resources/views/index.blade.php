@@ -134,9 +134,11 @@
                     </div>
 
                     <div class="messages-external-container">
-                        <div class="message-container">
+                        <div class="message-container position-3">
+                            <div class="message">A product on cryptocurrency just was posted on Product Hunt</div>
                             <img class="arrow" src="/img/arrow.png" />
                         </div>
+
                     </div>
                 </div>
 
