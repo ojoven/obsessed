@@ -4964,15 +4964,15 @@ footer { padding: 5.625rem 0; }
 @media only screen and (min-width: 768px) { footer { padding: 5.3125rem 0 5.3125rem; } }
 footer .footer { text-align: center; max-width: 40.625rem; margin: 0 auto; }
 footer .footer .brand-logo { margin-bottom: 1.75rem; }
-footer .footer__caption { margin-bottom: 2.1875rem; font-size: 1rem; font-weight: 400; line-height: 1.5rem; }
+footer .footer__caption { margin-bottom: 2.1875rem; font-size: 1rem; font-weight: 300; line-height: 1.5rem; }
 @media only screen and (min-width: 768px) { footer .footer__caption { margin-bottom: 3.4375rem; } }
 footer .footer-widget { margin-bottom: 0.9375rem; }
 footer .footer-widget ul { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
 footer .footer-widget li { margin: 0 0.9375rem; }
-footer .footer-widget li a { color: #2d3136; font-family: "Fira Sans", Helvetica, Arial, sans-serif; font-size: 1rem; font-weight: 400; line-height: 1.5rem; transition: .3s; }
+footer .footer-widget li a { color: #2d3136; font-family: "Fira Sans", Helvetica, Arial, sans-serif; font-size: 1rem; font-weight: 300; line-height: 1.5rem; transition: .3s; }
 footer .footer-widget li a:hover { color: #DCB501; }
 footer .footer-copyright { text-align: center; }
-footer .footer-copyright__text, footer .footer-copyright a { color: #818992; font-size: 1rem; line-height: 1.5rem; font-weight: 400; }
+footer .footer-copyright__text, footer .footer-copyright a { color: #818992; font-size: 1rem; line-height: 1.5rem; font-weight: 300; }
 footer .footer-copyright a { transition: .3s; }
 footer .footer-copyright a:hover { color: #2d3136; }
 footer .footer-copyright i { color: #ea4a27; }
@@ -5120,13 +5120,26 @@ section[class^=hero-] { position: relative; z-index: 1; overflow: hidden; backgr
 .mobile { width: 600px; max-width: 90%; }
 
 .timeline { background: #ffffff; position: absolute; top: 76px; left: 363px; width: 233px; height: 415px; padding: 10px; box-sizing: border-box; overflow: hidden; }
-@media only screen and (max-width: 768px) { .timeline { display: none; } }
+@media only screen and (max-width: 1199px) { .timeline { left: 273px; } }
+@media only screen and (max-width: 991px) { .timeline { left: 153px; } }
+@media only screen and (max-width: 767px) { .timeline { left: 102px; top: 65px; width: 188px; height: 326px; } }
+@media only screen and (max-width: 575px) { .timeline { left: 19vw; top: 12vw; width: 35vw; height: 60vw; } }
 .timeline .post { height: 90px; background: #eee; margin: 0 0 10px; transition: all .5s ease-in-out; }
 .timeline .post.active { background: #fedd45; }
 .timeline .post.loading { height: 0; }
+@media only screen and (max-width: 767px) { .timeline .post { height: 60px; } }
 
-.messages-external-container { position: absolute; top: 0; right: 10%; font-weight: 300; }
-.messages-external-container .message { font-size: 1.375rem; width: 300px; max-width: 80%; }
+.messages-external-container { position: absolute; top: 0; right: 10%; font-weight: 300; width: 100%; }
+.messages-external-container .message-container { transition: opacity .3s ease; position: absolute; width: 300px; }
+.messages-external-container .message-container.transition { opacity: 0; }
+.messages-external-container .message-container.position-1 { top: 0; right: 0; }
+.messages-external-container .message-container.position-1 .arrow { transform: scaleX(-1); margin-top: 20px; }
+.messages-external-container .message-container.position-2 { top: 261px; right: -46px; }
+.messages-external-container .message-container.position-2 .arrow { transform: scaleX(-1) scaleY(-1) rotate(29deg); position: absolute; top: -113px; left: -34px; }
+.messages-external-container .message { font-size: 1.375rem; width: 100%; }
+.messages-external-container .arrow { width: 146px; }
+@media only screen and (max-width: 768px) { .messages-external-container { right: 10px; text-align: right; }
+  .messages-external-container .message { font-size: 1rem; } }
 
 /*========================= club =========================*/
 .section-club .throne { max-width: 80%; margin: 0 auto; width: 250px; }

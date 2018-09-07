@@ -19,8 +19,9 @@ footer {
         &__caption {
             margin-bottom: rem(35);
             font-size: rem(16);
-            font-weight: 400;
+            font-weight: 300;
             line-height: rem(24);
+
             @include media(768) {
                 margin-bottom: rem(55);
             }
@@ -40,7 +41,7 @@ footer {
                     color: $color-black;
                     font-family: $font-sfp;
                     font-size: rem(16);
-                    font-weight: 400;
+                    font-weight: 300;
                     line-height: rem(24);
                     transition: .3s;
                     &:hover {
@@ -57,7 +58,7 @@ footer {
                 color: $color-gray;
                 font-size: rem(16);
                 line-height: rem(24);
-                font-weight: 400;
+                font-weight: 300;
             }
 
             a {

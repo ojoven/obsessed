@@ -22,8 +22,20 @@
 	box-sizing: border-box;
 	overflow: hidden;
 
-	@include mediaMax(768) {
-		display: none;
+	@include mediaMax(1199) { left: 273px; }
+	@include mediaMax(991) { left: 153px; }
+	@include mediaMax(767) {
+		left: 102px;
+		top: 65px;
+		width: 188px;
+		height: 326px;
+	}
+
+	@include mediaMax(575) {
+		left: 19vw;
+		top: 12vw;
+		width: 35vw;
+		height: 60vw;
 	}
 
 	.post {
@@ -39,6 +51,10 @@
 		&.loading {
 			height: 0;
 		}
+
+		@include mediaMax(767) {
+			height: 60px;
+		}
 	}
 }
 
@@ -49,11 +65,57 @@
 	top: 0;
 	right: 10%;
 	font-weight: 300;
+	width: 100%;
+
+	.message-container {
+		transition: opacity .3s ease;
+		position: absolute;
+		width: 300px;
+
+		&.transition {
+			opacity: 0;
+		}
+
+		&.position-1 {
+			top: 0;
+			right: 0;
+
+			.arrow {
+				transform: scaleX(-1);
+				margin-top: 20px;
+			}
+		}
+
+		&.position-2 {
+			top: 261px;
+			right: -46px;
+
+			.arrow {
+				transform: scaleX(-1) scaleY(-1) rotate(29deg);
+				position: absolute;
+				top: -113px;
+				left: -34px;
+			}
+		}
+	}
 
 	.message {
 		font-size: rem(22);
-		width: 300px;
-		max-width: 80%;
+		width: 100%;
+	}
+
+	.arrow {
+		width: 146px;
+	}
+
+	@include mediaMax(768) {
+
+		right: 10px;
+		text-align: right;
+
+		.message {
+			font-size: rem(16);
+		}
 	}
 
 }

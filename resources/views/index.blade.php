@@ -83,7 +83,6 @@
                                 <h1 class="hero__title">Obsessed about side projects?</h1>
                                 <p class="hero__caption">
                                     Access our exclusive timeline and get fed with every post and comment, video, and conversation on the Internet related to side projects.
-                                    <!--<span style="font-size: 12px" class="">* via email, push notification or via our timeline. Frequency adjustable.</span><br>-->
                                 </p>
                                 <a href="#" class="db-btn db-btn__primary db-btn__type-md">Feed your obsession for $5/mo</a>
                             </div>
@@ -134,7 +133,11 @@
 
                     </div>
 
-                    <div class="messages-external-container"></div>
+                    <div class="messages-external-container">
+                        <div class="message-container">
+                            <img class="arrow" src="/img/arrow.png" />
+                        </div>
+                    </div>
                 </div>
 
             </div>
